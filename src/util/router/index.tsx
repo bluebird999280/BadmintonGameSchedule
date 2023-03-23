@@ -1,17 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-interface IRouterProviderHocProps {
-  children: JSX.Element;
-}
+import Main from "page/Main";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Main />,
   },
 ]);
 
-function RouterProviderHoc({ children }: IRouterProviderHocProps): JSX.Element {
-  return <RouterProvider router={router} fallbackElement={children} />;
+function RouterProviderHoc(): JSX.Element {
+  return <RouterProvider router={router} />;
 }
 
 export default RouterProviderHoc;
