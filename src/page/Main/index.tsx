@@ -1,18 +1,9 @@
-import { Wrapper, Container, Searchbar, SearchButton } from "./style"
+import Search from "feature/search/container"
 
 function App() {
   return (
     <div>
-      <Wrapper>
-        <Container>
-          <div className="search">
-            <Searchbar />
-            <SearchButton />
-          </div>
-          <div className="list"></div>
-          <div className="index"></div>
-        </Container>
-      </Wrapper>
+      <Search />
     </div>
   )
 }
