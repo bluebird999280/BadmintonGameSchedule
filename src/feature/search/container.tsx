@@ -13,8 +13,8 @@ function Search(): JSX.Element {
   const dispatch = useAppDispatch()
 
   const searchOnSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault()
+    (e: React.FormEvent | undefined) => {
+      e?.preventDefault()
       dispatch(getCompetitionByName(query))
     },
     [dispatch, query]
@@ -33,7 +33,7 @@ function Search(): JSX.Element {
         <Container>
           <form className="search" onSubmit={searchOnSubmit}>
             <SearchBar query={query} onChange={searchBarOnChange} />
-            <SearchButton />
+            <SearchButton onClick={searchOnSubmit} />
           </form>
           <div className="list">
             <SearchList />
