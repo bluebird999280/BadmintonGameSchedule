@@ -9,9 +9,14 @@ import IndexButton from "./component/IndexButton"
 import { Wrapper, Container } from "./style"
 
 function Search(): JSX.Element {
-  const query = useAppSelector((state) => state.search.query)
+  // redux
   const dispatch = useAppDispatch()
+  const { query, competionList } = useAppSelector((state) => ({
+    query: state.search.query,
+    competionList: state.search.competionList,
+  }))
 
+  // useCallback
   const searchOnSubmit = useCallback(
     (e: React.FormEvent | undefined) => {
       e?.preventDefault()
@@ -36,9 +41,21 @@ function Search(): JSX.Element {
             <SearchButton onClick={searchOnSubmit} />
           </form>
           <div className="list">
-            <SearchList />
-            <SearchList />
-            <SearchList />
+            {competionList != undefined &&
+              competionList.map((list, index) => (
+                <SearchList
+                  key={index}
+                  progress={
+                    list.STAT === "4"
+                      ? "progress"
+                      : list.STAT === "5"
+                      ? "completion"
+                      : "schedule"
+                  }
+                  title={list.TOURNAMENT_NM}
+                  date={list.TOUR_DATE}
+                />
+              ))}
           </div>
           <div className="pagination">
             <IndexButton />

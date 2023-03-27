@@ -1,13 +1,21 @@
 import { Wrapper, ProgressWrapper, TextContainer } from "./style"
-function SearchList(): JSX.Element {
+import { ISearchListProps } from "./type"
+
+const nameByProgress = {
+  schedule: "예정",
+  progress: "진행",
+  completion: "완료",
+}
+
+function SearchList({ progress, title, date }: ISearchListProps): JSX.Element {
   return (
     <Wrapper>
-      <ProgressWrapper type="progress">진행</ProgressWrapper>
+      <ProgressWrapper type={progress}>
+        {nameByProgress[progress]}
+      </ProgressWrapper>
       <TextContainer>
-        <div className="title">
-          2023 모다모다 x 전국스매싱자랑 전국 배드민턴 대회
-        </div>
-        <div className="date">04월 02일 ~ 04월 02일</div>
+        <div className="title">{title}</div>
+        <div className="date">{date}</div>
       </TextContainer>
     </Wrapper>
   )

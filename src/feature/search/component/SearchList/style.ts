@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { IProgressBackgroundColor, IProgressWrapper } from "./type"
 
 const progressBackgroundColor: IProgressBackgroundColor = {
-  schedule: "#f79516",
+  schedule: "#f42832",
   progress: "#3d96f2",
   completion: "#666666",
 }
