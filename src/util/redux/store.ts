@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit"
+import search from "feature/search/slice"
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    search,
+  },
 })
 
 export type RootState = ReturnType<typeof store.getState>
