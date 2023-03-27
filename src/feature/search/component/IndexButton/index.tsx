@@ -1,5 +1,6 @@
+import { Wrapper } from "./style"
 function IndexButton(): JSX.Element {
-  return <div></div>
+  return <Wrapper>1</Wrapper>
 }
 
 export default IndexButton

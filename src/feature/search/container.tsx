@@ -19,19 +19,13 @@ function Search(): JSX.Element {
             <SearchList />
             <SearchList />
           </div>
-          <div className="index">
-            <div>
-              <ShowMoreIndexButton />
-            </div>
-            <div>
-              <IndexButton />
-              <IndexButton />
-              <IndexButton />
-              <IndexButton />
-            </div>
-            <div>
-              <ShowMoreIndexButton />
-            </div>
+          <div className="pagination">
+            <ShowMoreIndexButton />
+            <IndexButton />
+            <IndexButton />
+            <IndexButton />
+            <IndexButton />
+            <ShowMoreIndexButton />
           </div>
         </Container>
       </Wrapper>
