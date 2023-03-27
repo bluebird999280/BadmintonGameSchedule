@@ -1,6 +1,7 @@
 import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
-import { changeQuery, getCompetitionByName } from "./slice"
+import { changeQuery } from "./slice"
+import { getCompetitionByName } from "./thunk"
 import SearchBar from "./component/SearchBar"
 import SearchButton from "./component/SearchButton"
 import SearchList from "./component/SearchList"
@@ -9,7 +10,6 @@ import { Wrapper, Container } from "./style"
 
 function Search(): JSX.Element {
   const query = useAppSelector((state) => state.search.query)
-
   const dispatch = useAppDispatch()
 
   const searchOnSubmit = useCallback(

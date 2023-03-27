@@ -1,34 +1,11 @@
-import axiosInstance from "util/axios"
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-
-export const getCompetitionByName = createAsyncThunk(
-  "search/getCompetitionByName",
-  async (query: string, thunkAPI) => {
-    const param = {
-      GRADE: "",
-      grade: "30",
-      pageStart: 0,
-      pageLimit: 10,
-      schTmNm: query,
-    }
-
-    const response = await axiosInstance({
-      method: "post",
-      url: "mobile_tm_list.php",
-      data: {
-        DATA: JSON.stringify(param),
-      },
-    })
-
-    return response.data
-  }
-)
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { getCompetitionByName } from "./thunk"
 
 export const searchSlice = createSlice({
   name: "search",
   initialState: {
     query: "",
-    list: [],
+    response: [],
   },
   reducers: {
     changeQuery: (state, { payload }: PayloadAction<string>) => {
@@ -36,9 +13,12 @@ export const searchSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getCompetitionByName.fulfilled, (state, action) => {
-      state.list = action.payload
-    })
+    builder.addCase(
+      getCompetitionByName.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.response = action.payload
+      }
+    )
   },
 })
 
