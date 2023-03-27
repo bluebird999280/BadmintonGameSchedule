@@ -1,7 +1,6 @@
 import SearchBar from "./component/SearchBar"
 import SearchButton from "./component/SearchButton"
 import SearchList from "./component/SearchList"
-import ShowMoreIndexButton from "./component/ShowMoreIndexButton"
 import IndexButton from "./component/IndexButton"
 import { Wrapper, Container } from "./style"
 
@@ -20,12 +19,10 @@ function Search(): JSX.Element {
             <SearchList />
           </div>
           <div className="pagination">
-            <ShowMoreIndexButton />
             <IndexButton />
             <IndexButton />
             <IndexButton />
             <IndexButton />
-            <ShowMoreIndexButton />
           </div>
         </Container>
       </Wrapper>
