@@ -1,16 +1,14 @@
-import { useState, useCallback } from "react"
 import { Wrapper, StyledInput } from "./style"
 
-function SearchBar(): JSX.Element {
-  const [value, setValue] = useState("")
+interface ISearchBarProps {
+  query: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value)
-  }, [])
-
+function SearchBar({ query, onChange }: ISearchBarProps): JSX.Element {
   return (
     <Wrapper>
-      <StyledInput value={value} onChange={onChange} />
+      <StyledInput value={query} onChange={onChange} />
     </Wrapper>
   )
 }

@@ -31,6 +31,7 @@ export const TextContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-left: 25px;
+  text-align: left;
   & .title {
     color: #333;
     font-size: 16px;
