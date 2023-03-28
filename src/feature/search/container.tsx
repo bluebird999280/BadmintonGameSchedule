@@ -2,11 +2,10 @@ import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import { changeQuery } from "./slice"
 import { getCompetitionByName } from "./thunk"
-import SearchBar from "./component/SearchBar"
-import SearchButton from "./component/SearchButton"
 import SearchList from "./component/SearchList"
 import IndexButton from "./component/IndexButton"
 import { Wrapper, Container } from "./style"
+import SearchForm from "./component/SearchForm"
 
 function Search(): JSX.Element {
   // redux
@@ -17,7 +16,7 @@ function Search(): JSX.Element {
   }))
 
   // useCallback
-  const searchOnSubmit = useCallback(
+  const searchFormOnSubmit = useCallback(
     (e: React.FormEvent | undefined) => {
       e?.preventDefault()
       dispatch(getCompetitionByName(query))
@@ -25,7 +24,7 @@ function Search(): JSX.Element {
     [dispatch, query]
   )
 
-  const searchBarOnChange = useCallback(
+  const searchFormOnChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       dispatch(changeQuery(event.target.value))
     },
@@ -36,10 +35,11 @@ function Search(): JSX.Element {
     <div>
       <Wrapper>
         <Container>
-          <form className="search" onSubmit={searchOnSubmit}>
-            <SearchBar query={query} onChange={searchBarOnChange} />
-            <SearchButton onClick={searchOnSubmit} />
-          </form>
+          <SearchForm
+            query={query}
+            onChange={searchFormOnChange}
+            onSubmit={searchFormOnSubmit}
+          />
           <div className="list">
             {competionList != undefined &&
               competionList.map((list, index) => (
