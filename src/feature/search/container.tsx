@@ -41,7 +41,7 @@ function Search(): JSX.Element {
             onSubmit={searchFormOnSubmit}
           />
           <div className="list">
-            {competionList != undefined &&
+            {competionList !== undefined &&
               competionList.map((list, index) => (
                 <SearchList
                   key={index}

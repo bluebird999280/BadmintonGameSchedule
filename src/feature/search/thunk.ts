@@ -6,7 +6,7 @@ export const getCompetitionByName = createAsyncThunk(
   async (query: string, thunkAPI) => {
     const param = {
       pageStart: 0,
-      pageLimit: 10,
+      pageLimit: 50,
       schTmNm: query,
     }
 

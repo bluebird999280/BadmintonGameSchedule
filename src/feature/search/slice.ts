@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getCompetitionByName } from "./thunk"
-import { IInitialState, IPayload } from "./type"
+import { IInitialState, IDataList, IGetCompetitionByNamePayload } from "./type"
 
 const initialState: IInitialState = {
   query: "",
-  competionList: [],
+  competionList: undefined,
 }
 
 export const searchSlice = createSlice({
@@ -18,7 +18,7 @@ export const searchSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       getCompetitionByName.fulfilled,
-      (state, action: PayloadAction<IPayload>) => {
+      (state, action: PayloadAction<IGetCompetitionByNamePayload>) => {
         state.competionList = action.payload.data_list
       }
     )
