@@ -21,6 +21,9 @@ export const ProgressWrapper = styled.div<IProgressWrapper>`
   color: white;
   opacity: 0.7;
   font-weight: 600;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
   padding: 25px 30px 25px 20px;
   border-radius: 0 30px 30px 0;
   background-color: ${(props) => progressBackgroundColor[props.type]};
@@ -32,6 +35,7 @@ export const TextContainer = styled.div`
   justify-content: center;
   margin-left: 25px;
   text-align: left;
+  padding: 10px 0px;
   & .title {
     color: #333;
     font-size: 16px;
