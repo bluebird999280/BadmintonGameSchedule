@@ -1,6 +1,6 @@
-import { useCallback } from "react"
+import { useMemo, useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
-import { changeQuery } from "./slice"
+import { changeQuery, changePageStart, changeCurrentPage } from "./slice"
 import { getCompetitionByName } from "./thunk"
 import SearchList from "./component/SearchList"
 import IndexButton from "./component/IndexButton"
@@ -10,18 +10,38 @@ import SearchForm from "./component/SearchForm"
 function Search(): JSX.Element {
   // redux
   const dispatch = useAppDispatch()
-  const { query, competionList } = useAppSelector((state) => ({
+  const {
+    query,
+    pageCompetionList,
+    pageStart,
+    pageLimit,
+    previousPage,
+    currentPage,
+    pageUnit,
+  } = useAppSelector((state) => ({
     query: state.search.query,
-    competionList: state.search.competionList,
+    pageCompetionList: state.search.pageCompetionList,
+    pageStart: state.search.pageStart,
+    pageLimit: state.search.pageLimit,
+    previousPage: state.search.previousPage,
+    currentPage: state.search.currentPage,
+    pageUnit: state.search.pageUnit,
   }))
 
   // useCallback
   const searchFormOnSubmit = useCallback(
     (e: React.FormEvent | undefined) => {
       e?.preventDefault()
-      dispatch(getCompetitionByName(query))
+      dispatch(changePageStart(0))
+      dispatch(
+        getCompetitionByName({
+          query,
+          pageStart,
+          pageLimit: pageLimit * 10,
+        })
+      )
     },
-    [dispatch, query]
+    [dispatch, query, pageStart, pageLimit]
   )
 
   const searchFormOnChange = useCallback(
@@ -30,6 +50,36 @@ function Search(): JSX.Element {
     },
     [dispatch]
   )
+
+  const showCompetionList = useCallback(
+    (page: number) => () => {
+      dispatch(changeCurrentPage(page))
+    },
+    [dispatch]
+  )
+
+  // useMemo
+  const pagenationList = useMemo(() => {
+    const currentPageRange = Math.floor(currentPage / pageUnit)
+    const previousPageRange = Math.floor(previousPage / pageUnit)
+    const startPageRange = currentPageRange * pageUnit
+
+    if (previousPageRange !== currentPageRange) {
+      return Array.from({ length: pageUnit }).map((_, idx) => (
+        <IndexButton
+          key={startPageRange + idx + 1}
+          index={startPageRange + idx + 1}
+          onClick={showCompetionList(startPageRange + idx)}
+        />
+      ))
+    }
+  }, [
+    showCompetionList,
+    pageCompetionList,
+    previousPage,
+    currentPage,
+    pageUnit,
+  ])
 
   return (
     <div>
@@ -40,29 +90,27 @@ function Search(): JSX.Element {
             onChange={searchFormOnChange}
             onSubmit={searchFormOnSubmit}
           />
-          <div className="list">
-            {competionList !== undefined &&
-              competionList.map((list, index) => (
-                <SearchList
-                  key={index}
-                  progress={
-                    list.STAT === "4"
-                      ? "progress"
-                      : list.STAT === "5"
-                      ? "completion"
-                      : "schedule"
-                  }
-                  title={list.TOURNAMENT_NM}
-                  date={list.TOUR_DATE}
-                />
-              ))}
-          </div>
-          <div className="pagination">
-            <IndexButton />
-            <IndexButton />
-            <IndexButton />
-            <IndexButton />
-          </div>
+          {pageCompetionList !== undefined && (
+            <>
+              <div className="list">
+                {pageCompetionList[currentPage].map((list, key) => (
+                  <SearchList
+                    key={key}
+                    progress={
+                      list.STAT === "4"
+                        ? "progress"
+                        : list.STAT === "5"
+                        ? "completion"
+                        : "schedule"
+                    }
+                    title={list.TOURNAMENT_NM}
+                    date={list.TOUR_DATE}
+                  />
+                ))}
+              </div>
+              <div className="pagination">{pagenationList}</div>
+            </>
+          )}
         </Container>
       </Wrapper>
     </div>

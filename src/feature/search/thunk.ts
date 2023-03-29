@@ -1,12 +1,13 @@
 import axiosInstance from "util/axios"
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import { IgetCompetitionByName } from "./type"
 
 export const getCompetitionByName = createAsyncThunk(
   "search/getCompetitionByName",
-  async (query: string, thunkAPI) => {
+  async ({ query, pageStart, pageLimit }: IgetCompetitionByName) => {
     const param = {
-      pageStart: 0,
-      pageLimit: 50,
+      pageStart,
+      pageLimit,
       schTmNm: query,
     }
 

@@ -5,7 +5,13 @@
 // slice type
 export interface IInitialState {
   query: string
-  competionList?: IDataList[]
+  index: number
+  pageStart: number
+  pageLimit: number
+  previousPage: number
+  currentPage: number
+  pageUnit: number
+  pageCompetionList?: IDataList[][]
 }
 
 export interface IGetCompetitionByNamePayload {
@@ -61,3 +67,8 @@ export interface IDataList {
 }
 
 // thunk type
+export interface IgetCompetitionByName {
+  query: string
+  pageStart: number
+  pageLimit: number
+}
