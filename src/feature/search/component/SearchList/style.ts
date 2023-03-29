@@ -16,6 +16,11 @@ export const Wrapper = styled.div`
   -webkit-box-shadow: 5px 5px 25px 5px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 25px 5px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0.5px 5px 0.5px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.5s ease;
+
+  &:hover {
+    box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.25);
+  }
 `
 export const ProgressWrapper = styled.div<IProgressWrapper>`
   color: white;
