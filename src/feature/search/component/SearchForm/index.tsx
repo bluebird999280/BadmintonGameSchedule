@@ -5,13 +5,9 @@ import {
   StyledInput,
   SearchImageWrapper,
 } from "./style"
-const searchImageUrl = process.env.PUBLIC_URL + "/icon/search.png"
-interface ISearchFormProps {
-  query: string
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  onSubmit: (e: React.FormEvent | undefined) => void
-}
+import { ISearchFormProps } from "./type"
 
+const searchImageUrl = process.env.PUBLIC_URL + "/icon/search.png"
 function SearchForm({
   query,
   onChange,
