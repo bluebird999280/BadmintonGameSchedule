@@ -1,6 +1,6 @@
 import Search from "feature/search/container"
 
-function App() {
+function MainPage() {
   return (
     <div>
       <Search />
@@ -8,4 +8,4 @@ function App() {
   )
 }
 
-export default App
+export default MainPage
