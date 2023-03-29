@@ -16,7 +16,7 @@ function Search(): JSX.Element {
 
   // useCallback
   const searchFormOnSubmit = useCallback(
-    (e: React.FormEvent | undefined) => {
+    (e?: React.FormEvent) => {
       e?.preventDefault()
       dispatch(changePageStart(0))
       dispatch(
@@ -37,7 +37,7 @@ function Search(): JSX.Element {
     [dispatch]
   )
 
-  const showCompetionList = useCallback(
+  const indexButtonOnClick = useCallback(
     (page: number) => () => {
       dispatch(changeCurrentPage(page))
     },
@@ -45,21 +45,44 @@ function Search(): JSX.Element {
   )
 
   // useMemo
+  const searchList = useMemo(() => {
+    if (
+      pageCompetionList.length === 0 ||
+      pageCompetionList[currentPage] === undefined
+    )
+      return <></>
+    return pageCompetionList[currentPage].map((list, key) => (
+      <SearchList
+        key={key}
+        progress={
+          list.STAT === "4"
+            ? "progress"
+            : list.STAT === "5"
+            ? "completion"
+            : "schedule"
+        }
+        title={list.TOURNAMENT_NM}
+        date={list.TOUR_DATE}
+      />
+    ))
+  }, [pageCompetionList, currentPage])
+
   const pagenationList = useMemo(() => {
+    if (pageCompetionList.length === 0) return <></>
+
     const currentPageRange = Math.floor(currentPage / pageUnit)
     const previousPageRange = Math.floor(previousPage / pageUnit)
     const startPageRange = currentPageRange * pageUnit
-
     if (previousPageRange !== currentPageRange) {
-      return Array.from({ length: pageUnit }).map((_, idx) => (
+      return Array.from({ length: pageUnit }).map((_, index) => (
         <IndexButton
-          key={startPageRange + idx + 1}
-          index={startPageRange + idx + 1}
-          onClick={showCompetionList(startPageRange + idx)}
+          key={startPageRange + index + 1}
+          index={startPageRange + index + 1}
+          onClick={indexButtonOnClick(startPageRange + index)}
         />
       ))
     }
-  }, [showCompetionList, pageCompetionList, previousPage, currentPage])
+  }, [pageCompetionList, indexButtonOnClick, previousPage, currentPage])
 
   return (
     <div>
@@ -70,27 +93,8 @@ function Search(): JSX.Element {
             onChange={searchFormOnChange}
             onSubmit={searchFormOnSubmit}
           />
-          {pageCompetionList !== undefined && (
-            <>
-              <div className="list">
-                {pageCompetionList[currentPage].map((list, key) => (
-                  <SearchList
-                    key={key}
-                    progress={
-                      list.STAT === "4"
-                        ? "progress"
-                        : list.STAT === "5"
-                        ? "completion"
-                        : "schedule"
-                    }
-                    title={list.TOURNAMENT_NM}
-                    date={list.TOUR_DATE}
-                  />
-                ))}
-              </div>
-              <div className="pagination">{pagenationList}</div>
-            </>
-          )}
+          <div className="list">{searchList}</div>
+          <div className="pagination">{pagenationList}</div>
         </Container>
       </Wrapper>
     </div>

@@ -1,16 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getCompetitionByName } from "./thunk"
+import { pageLimit } from "util/constant"
 import { IInitialState, IDataList, IGetCompetitionByNamePayload } from "./type"
 
 const initialState: IInitialState = {
   query: "",
-  index: 0,
   pageStart: 0,
-  pageLimit: 10,
   previousPage: -1,
   currentPage: 0,
-  pageUnit: 5,
-  pageCompetionList: undefined,
+  pageCompetionList: [],
 }
 
 export const searchSlice = createSlice({
@@ -32,10 +30,10 @@ export const searchSlice = createSlice({
       getCompetitionByName.fulfilled,
       (state, action: PayloadAction<IGetCompetitionByNamePayload>) => {
         const totalPageList = action.payload.data_list
-        const { pageStart, pageLimit } = state
+        const { pageStart } = state
         const tempPageCompetionList: IDataList[][] = []
 
-        if (totalPageList !== undefined) {
+        if (totalPageList.length !== 0) {
           for (let i = 0; i < totalPageList.length / pageLimit; i++)
             tempPageCompetionList.push(
               totalPageList?.slice(

@@ -5,19 +5,16 @@
 // slice type
 export interface IInitialState {
   query: string
-  index: number
   pageStart: number
-  pageLimit: number
   previousPage: number
   currentPage: number
-  pageUnit: number
-  pageCompetionList?: IDataList[][]
+  pageCompetionList: IDataList[][]
 }
 
 export interface IGetCompetitionByNamePayload {
-  data_list?: IDataList[]
-  gymList?: any[]
-  fileList?: any[]
+  data_list: IDataList[]
+  gymList: any[]
+  fileList: any[]
   ResultCode: string
 }
 
