@@ -1,11 +1,7 @@
 import Search from "feature/search/container"
 
 function MainPage() {
-  return (
-    <div>
-      <Search />
-    </div>
-  )
+  return <Search />
 }
 
 export default MainPage

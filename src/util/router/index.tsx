@@ -1,10 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Main from "page/Main"
+import MainPage from "page/Main"
+import SchedulePage from "page/Schedule"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <MainPage />,
+  },
+  {
+    path: "/schedule",
+    element: <SchedulePage />,
   },
 ])
 
