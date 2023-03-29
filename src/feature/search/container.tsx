@@ -1,32 +1,18 @@
 import { useMemo, useCallback } from "react"
+import { pageLimit, pageUnit } from "util/constant"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import { changeQuery, changePageStart, changeCurrentPage } from "./slice"
 import { getCompetitionByName } from "./thunk"
+import SearchForm from "./component/SearchForm"
 import SearchList from "./component/SearchList"
 import IndexButton from "./component/IndexButton"
 import { Wrapper, Container } from "./style"
-import SearchForm from "./component/SearchForm"
 
 function Search(): JSX.Element {
   // redux
   const dispatch = useAppDispatch()
-  const {
-    query,
-    pageCompetionList,
-    pageStart,
-    pageLimit,
-    previousPage,
-    currentPage,
-    pageUnit,
-  } = useAppSelector((state) => ({
-    query: state.search.query,
-    pageCompetionList: state.search.pageCompetionList,
-    pageStart: state.search.pageStart,
-    pageLimit: state.search.pageLimit,
-    previousPage: state.search.previousPage,
-    currentPage: state.search.currentPage,
-    pageUnit: state.search.pageUnit,
-  }))
+  const { query, pageCompetionList, pageStart, previousPage, currentPage } =
+    useAppSelector((state) => ({ ...state.search }))
 
   // useCallback
   const searchFormOnSubmit = useCallback(
@@ -41,7 +27,7 @@ function Search(): JSX.Element {
         })
       )
     },
-    [dispatch, query, pageStart, pageLimit]
+    [dispatch, query, pageStart]
   )
 
   const searchFormOnChange = useCallback(
@@ -73,13 +59,7 @@ function Search(): JSX.Element {
         />
       ))
     }
-  }, [
-    showCompetionList,
-    pageCompetionList,
-    previousPage,
-    currentPage,
-    pageUnit,
-  ])
+  }, [showCompetionList, pageCompetionList, previousPage, currentPage])
 
   return (
     <div>
