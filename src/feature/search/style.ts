@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const Wrapper = styled.div``
 export const Container = styled.div`
   text-align: center;
+  padding-bottom: 30px;
 
   & > .search {
     display: flex;
@@ -12,13 +13,5 @@ export const Container = styled.div`
   & > .pagination {
     display: inline-flex;
     border: 1px solid #dde3ec;
-  }
-
-  & > .pagination > div:nth-child(2n) {
-    background-color: #fff;
-  }
-
-  & > .pagination > div:nth-child(2n-1) {
-    background-color: #f8f8f8;
   }
 `
