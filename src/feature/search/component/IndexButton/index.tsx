@@ -1,7 +1,7 @@
 import { Wrapper } from "./style"
 
 interface IIndexButtonProps {
-  index: number
+  index: number | string
   onClick: () => void
 }
 function IndexButton({ index, onClick }: IIndexButtonProps): JSX.Element {
