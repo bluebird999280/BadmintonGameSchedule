@@ -9,9 +9,4 @@ export const Container = styled.div`
     display: flex;
     padding: 10px;
   }
-
-  & > .pagination {
-    display: inline-flex;
-    border: 1px solid #dde3ec;
-  }
 `
