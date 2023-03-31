@@ -23,7 +23,7 @@ function Search(): JSX.Element {
         getCompetitionByName({
           query,
           pageStart,
-          pageLimit: pageLimit * 10,
+          pageLimit: pageLimit * 2 * 10, // 현재 pagenation 리스트와 다음 pagenation 리스트를 가져온다.
         })
       )
     },
@@ -67,6 +67,35 @@ function Search(): JSX.Element {
     ))
   }, [pageCompetionList, currentPage])
 
+  const movePrevPagenationList = useMemo(() => {
+    const currentPageRange = Math.floor(currentPage / pageUnit)
+
+    if (currentPageRange > 0)
+      return (
+        <IndexButton
+          index="<"
+          onClick={() =>
+            dispatch(changeCurrentPage((currentPageRange - 1) * pageUnit))
+          }
+        />
+      )
+  }, [currentPage])
+
+  const moveNextpagenationList = useMemo(() => {
+    const currentPageRange = Math.floor(currentPage / pageUnit)
+
+    if (pageCompetionList[currentPageRange * pageUnit + 1] !== undefined) {
+      return (
+        <IndexButton
+          index=">"
+          onClick={() =>
+            dispatch(changeCurrentPage((currentPageRange + 1) * pageUnit))
+          }
+        />
+      )
+    }
+  }, [dispatch, pageCompetionList, currentPage])
+
   const pagenationList = useMemo(() => {
     if (pageCompetionList.length === 0) return <></>
 
@@ -74,13 +103,17 @@ function Search(): JSX.Element {
     const previousPageRange = Math.floor(previousPage / pageUnit)
     const startPageRange = currentPageRange * pageUnit
     if (previousPageRange !== currentPageRange) {
-      return Array.from({ length: pageUnit }).map((_, index) => (
-        <IndexButton
-          key={startPageRange + index + 1}
-          index={startPageRange + index + 1}
-          onClick={indexButtonOnClick(startPageRange + index)}
-        />
-      ))
+      return Array.from({ length: pageUnit }).map((_, index) => {
+        if (pageCompetionList[startPageRange + index] !== undefined) {
+          return (
+            <IndexButton
+              key={startPageRange + index + 1}
+              index={startPageRange + index + 1}
+              onClick={indexButtonOnClick(startPageRange + index)}
+            />
+          )
+        }
+      })
     }
   }, [pageCompetionList, indexButtonOnClick, previousPage, currentPage])
 
@@ -94,7 +127,11 @@ function Search(): JSX.Element {
             onSubmit={searchFormOnSubmit}
           />
           <div className="list">{searchList}</div>
-          <div className="pagination">{pagenationList}</div>
+          <div className="pagination">
+            {movePrevPagenationList}
+            {pagenationList}
+            {moveNextpagenationList}
+          </div>
         </Container>
       </Wrapper>
     </div>

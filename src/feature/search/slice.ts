@@ -22,6 +22,7 @@ export const searchSlice = createSlice({
       state.pageStart = payload
     },
     changeCurrentPage: (state, { payload }: PayloadAction<number>) => {
+      state.previousPage = state.currentPage
       state.currentPage = payload
     },
   },
