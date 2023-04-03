@@ -1,11 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit"
 import search from "feature/search/slice"
-import pagenation from "feature/pagenation/slice"
 
 const store = configureStore({
   reducer: {
     search,
-    pagenation,
   },
 })
 
