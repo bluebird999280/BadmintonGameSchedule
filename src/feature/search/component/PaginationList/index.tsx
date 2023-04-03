@@ -28,7 +28,7 @@ function PaginationList({
       {currentPageRange > 0 && (
         <PaginationButton index="<" onClick={movePrev} />
       )}
-      {Array.from({ length: pageRange }).map((_: any, index: number) => (
+      {Array.from({ length: pageRange }).map((_, index: number) => (
         <PaginationButton
           key={currentPageIndex + index + 1}
           index={currentPageIndex + index + 1}
