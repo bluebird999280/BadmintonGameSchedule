@@ -1,4 +1,4 @@
-import Search from "feature/search/container"
+import Search from "feature/search/index"
 
 function SearchCompetition(): JSX.Element {
   return <Search></Search>
