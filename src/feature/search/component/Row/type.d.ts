@@ -4,6 +4,7 @@ export type progressType = "schedule" | "progress" | "completion"
 
 export interface IRowProps {
   data: IDataList
+  onClick: () => void
 }
 
 export interface IProgressBackgroundColor {

@@ -1,5 +1,5 @@
 import { Wrapper, Container, Title, ClubRow } from "./style"
-import SearchForm from "common/component/SearchForm"
+import SearchForm from "feature/search/component/SearchForm"
 
 function ClubList(): JSX.Element {
   return (

@@ -6,7 +6,9 @@ import Row from "./component/Row"
 import PaginationList from "./component/PaginationList"
 import { getCompetitionByName } from "./thunk"
 import { changeQuery, changeCurrentPage } from "./slice"
+import { changeCompetition } from "feature/schedule/slice"
 import { Wrapper, Container } from "./style"
+import { IDataList } from "./type"
 
 function Search(): React.ReactElement {
   // redux
@@ -38,6 +40,13 @@ function Search(): React.ReactElement {
     },
     [dispatch]
   )
+  const rowOnClick = useCallback(
+    (competition: IDataList) => () => {
+      dispatch(changeCompetition(competition))
+    },
+    [dispatch]
+  )
+
   const pagenationButtonOnClick = useCallback(
     (page: number) => () => {
       dispatch(changeCurrentPage(page))
@@ -54,7 +63,9 @@ function Search(): React.ReactElement {
   // useMemo
   const showResultRow = useMemo(() => {
     if (list[currentPage] !== undefined)
-      return list[currentPage].map((data, key) => <Row key={key} data={data} />)
+      return list[currentPage].map((data, key) => (
+        <Row key={key} data={data} onClick={rowOnClick(data)} />
+      ))
   }, [list, currentPage])
 
   return (
