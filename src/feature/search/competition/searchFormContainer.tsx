@@ -1,7 +1,7 @@
 import { useCallback } from "react"
 import { PAGE_UNIT, LIST_UNIT } from "util/constant"
 import { useAppDispatch, useAppSelector } from "hook/redux"
-import SearchForm from "../component/SearchForm"
+import SearchForm from "component/search/SearchForm"
 import { getCompetitionByName } from "../thunk"
 import { changeQuery } from "../slice"
 

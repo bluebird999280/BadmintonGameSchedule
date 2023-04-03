@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import { changeCompetition } from "feature/schedule/slice"
 import { IDataList } from "../type"
-import Row from "../component/Row"
+import Row from "component/search/Row"
 
 function SearchListContainer(): JSX.Element {
   const dispatch = useAppDispatch()

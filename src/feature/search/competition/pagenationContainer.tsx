@@ -1,7 +1,7 @@
 import { useCallback } from "react"
 import { PAGE_UNIT, LIST_UNIT } from "util/constant"
 import { useAppDispatch, useAppSelector } from "hook/redux"
-import PaginationList from "../component/PaginationList"
+import PaginationList from "component/search/PaginationList"
 import { changeCurrentPage } from "../slice"
 
 function PagenationContainer(): JSX.Element {
