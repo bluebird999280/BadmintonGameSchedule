@@ -1,2 +1,2 @@
-export const pageLimit = 10
-export const pageUnit = 5
+export const LIST_UNIT = 10
+export const PAGE_UNIT = 5
