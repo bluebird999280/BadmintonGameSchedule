@@ -5,10 +5,8 @@
 // slice type
 export interface IInitialState {
   query: string
-  pageStart: number
-  previousPage: number
   currentPage: number
-  pageCompetionList: IDataList[][]
+  list: IDataList[][]
 }
 
 export interface IGetCompetitionByNamePayload {

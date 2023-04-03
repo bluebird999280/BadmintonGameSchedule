@@ -1,9 +1,9 @@
+import { IDataList } from "feature/search/type"
+
 export type progressType = "schedule" | "progress" | "completion"
 
-export interface ISearchListProps {
-  progress: progressType
-  title: string
-  date: string
+export interface IRowProps {
+  data: IDataList
 }
 
 export interface IProgressBackgroundColor {
