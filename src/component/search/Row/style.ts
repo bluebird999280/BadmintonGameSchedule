@@ -1,13 +1,17 @@
-import styled from "styled-components"
-import { IProgressBackgroundColor, IProgressWrapper } from "./type"
+import styled, { css } from "styled-components"
+import {
+  IProgressBackgroundColor,
+  IWrapperProps,
+  IProgressWrapper,
+} from "./type"
 
 const progressBackgroundColor: IProgressBackgroundColor = {
-  schedule: "#f42832",
-  progress: "#3d96f2",
-  completion: "#666666",
+  schedule: [244, 40, 50],
+  progress: [61, 150, 242],
+  completion: [102, 102, 102],
 }
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IWrapperProps>`
   display: flex;
   cursor: pointer;
   margin: 10px 10px 15px 10px;
@@ -21,6 +25,14 @@ export const Wrapper = styled.div`
   &:hover {
     box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.25);
   }
+
+  ${(props) =>
+    props.selected &&
+    css`
+     background-color : rgba(${progressBackgroundColor[props.type].join(
+       ","
+     )}, 0.18);};
+    `}
 `
 export const ProgressWrapper = styled.div<IProgressWrapper>`
   color: white;
@@ -31,7 +43,8 @@ export const ProgressWrapper = styled.div<IProgressWrapper>`
   align-items: center;
   padding: 25px 30px 25px 20px;
   border-radius: 0 30px 30px 0;
-  background-color: ${(props) => progressBackgroundColor[props.type]};
+  background-color: ${(props) =>
+    `rgb(${progressBackgroundColor[props.type].join(",")});`};
 `
 
 export const TextContainer = styled.div`

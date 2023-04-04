@@ -7,13 +7,13 @@ const nameByProgress = {
   completion: "완료",
 }
 
-function Row({ data, onClick }: IRowProps): JSX.Element {
+function Row({ data, selected, onClick }: IRowProps): JSX.Element {
   let stat: progressType = "schedule"
   if (data.STAT === "4") stat = "progress"
   else if (data.STAT === "5") stat = "completion"
 
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClick} selected={selected} type={stat}>
       <ProgressWrapper type={stat}>{nameByProgress[stat]}</ProgressWrapper>
       <TextContainer>
         <div className="title">{data.TOURNAMENT_NM}</div>

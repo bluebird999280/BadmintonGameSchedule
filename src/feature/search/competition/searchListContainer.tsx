@@ -6,9 +6,12 @@ import Row from "component/search/Row"
 
 function SearchListContainer(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { list, currentPage } = useAppSelector((state) => ({
-    ...state.search.competition,
-  }))
+  const { list, currentPage, selectedCompetition } = useAppSelector(
+    (state) => ({
+      ...state.search.competition,
+      selectedCompetition: state.schedule.competition,
+    })
+  )
 
   const rowOnClick = useCallback(
     (competition: ICompetitionData) => () => {
@@ -21,7 +24,12 @@ function SearchListContainer(): JSX.Element {
     <>
       {list[currentPage] !== undefined &&
         list[currentPage].map((data, key) => (
-          <Row key={key} data={data} onClick={rowOnClick(data)} />
+          <Row
+            key={key}
+            data={data}
+            selected={selectedCompetition === data}
+            onClick={rowOnClick(data)}
+          />
         ))}
     </>
   )
