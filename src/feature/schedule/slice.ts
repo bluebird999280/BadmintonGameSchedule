@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { IDataList } from "feature/search/type"
+import { ICompetitionData } from "feature/search/type"
 
 interface ITeam {
   [club: string]: string[]
 }
 
 interface IIinitalState {
-  competition?: IDataList
+  competition?: ICompetitionData
   club?: string[]
   team?: ITeam
 }
@@ -21,7 +21,10 @@ export const scheduleSlice = createSlice({
   name: "schedule",
   initialState,
   reducers: {
-    changeCompetition: (state, { payload }: PayloadAction<IDataList>) => {
+    changeCompetition: (
+      state,
+      { payload }: PayloadAction<ICompetitionData>
+    ) => {
       state.competition = payload
     },
   },

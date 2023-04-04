@@ -1,19 +1,38 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getCompetitionByName } from "./thunk"
 import { LIST_UNIT } from "util/constant"
-import { IInitialState, IGetCompetitionByNamePayload } from "./type"
+import {
+  IInitialState,
+  IChangeCurrentPagePayload,
+  IGetCompetitionByNamePayload,
+} from "./type"
 
 const initialState: IInitialState = {
-  currentPage: 0,
-  list: [],
+  competition: {
+    list: [],
+    currentPage: 0,
+  },
+  club: {
+    list: [],
+    currentPage: 0,
+  },
+  team: {
+    list: [],
+    currentPage: 0,
+  },
 }
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    changeCurrentPage: (state, { payload }: PayloadAction<number>) => {
-      state.currentPage = payload
+    changeCurrentPage: (
+      state,
+      {
+        payload: { name, currentPage },
+      }: PayloadAction<IChangeCurrentPagePayload>
+    ) => {
+      state[name].currentPage = currentPage
     },
   },
   extraReducers: (builder) => {
@@ -29,7 +48,7 @@ export const searchSlice = createSlice({
         for (let i = 0; i < length / LIST_UNIT; i++)
           temp.push(resultList.slice(i * LIST_UNIT, (i + 1) * LIST_UNIT))
 
-        state.list = temp
+        state.competition.list = temp
       }
     )
   },

@@ -1,17 +1,17 @@
-import { useCallback, useMemo } from "react"
+import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import { changeCompetition } from "feature/schedule/slice"
-import { IDataList } from "../type"
+import { ICompetitionData } from "../type"
 import Row from "component/search/Row"
 
 function SearchListContainer(): JSX.Element {
   const dispatch = useAppDispatch()
   const { list, currentPage } = useAppSelector((state) => ({
-    ...state.search,
+    ...state.search.competition,
   }))
 
   const rowOnClick = useCallback(
-    (competition: IDataList) => () => {
+    (competition: ICompetitionData) => () => {
       dispatch(changeCompetition(competition))
     },
     [dispatch]

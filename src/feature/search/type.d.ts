@@ -1,21 +1,4 @@
-// container type
-
-// style type
-
-// slice type
-export interface IInitialState {
-  currentPage: number
-  list: IDataList[][]
-}
-
-export interface IGetCompetitionByNamePayload {
-  data_list: IDataList[]
-  gymList: any[]
-  fileList: any[]
-  ResultCode: string
-}
-
-export interface IDataList {
+export interface ICompetitionData {
   ACCEPT_DATE: string
   ACCEPT_DATE_FROM: string
   ACCEPT_DATE_M: string
@@ -58,6 +41,34 @@ export interface IDataList {
   TOUR_MANAGER: string
   TOUR_SPONSOR: string
   TOUR_SUPPORT: string
+}
+
+// slice type
+export interface IInitialState {
+  competition: {
+    list: ICompetitionData[][]
+    currentPage: number
+  }
+  club: {
+    list: any[]
+    currentPage: number
+  }
+  team: {
+    list: any[]
+    currentPage: number
+  }
+}
+
+export interface IChangeCurrentPagePayload {
+  name: "competition" | "club" | "team"
+  currentPage: number
+}
+
+export interface IGetCompetitionByNamePayload {
+  data_list: IDataList[]
+  gymList: any[]
+  fileList: any[]
+  ResultCode: string
 }
 
 // thunk type

@@ -7,21 +7,33 @@ import { changeCurrentPage } from "../slice"
 function PagenationContainer(): JSX.Element {
   const dispatch = useAppDispatch()
   const { pageListLength, currentPageRange } = useAppSelector((state) => ({
-    pageListLength: state.search.list.length,
-    currentPageRange: Math.floor(state.search.currentPage / LIST_UNIT),
+    pageListLength: state.search.competition.list.length,
+    currentPageRange: Math.floor(
+      state.search.competition.currentPage / LIST_UNIT
+    ),
   }))
 
   const pagenationButtonOnClick = useCallback(
     (page: number) => () => {
-      dispatch(changeCurrentPage(page))
+      dispatch(changeCurrentPage({ name: "competition", currentPage: page }))
     },
     [dispatch]
   )
   const movePrevPagenationList = useCallback(() => {
-    dispatch(changeCurrentPage((currentPageRange - 1) * PAGE_UNIT))
+    dispatch(
+      changeCurrentPage({
+        name: "competition",
+        currentPage: (currentPageRange - 1) * PAGE_UNIT,
+      })
+    )
   }, [dispatch, currentPageRange])
   const moveNextPagenationList = useCallback(() => {
-    dispatch(changeCurrentPage((currentPageRange + 1) * PAGE_UNIT))
+    dispatch(
+      changeCurrentPage({
+        name: "competition",
+        currentPage: (currentPageRange + 1) * PAGE_UNIT,
+      })
+    )
   }, [dispatch, currentPageRange])
 
   return (
