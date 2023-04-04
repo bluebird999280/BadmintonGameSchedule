@@ -4,7 +4,6 @@ import { LIST_UNIT } from "util/constant"
 import { IInitialState, IGetCompetitionByNamePayload } from "./type"
 
 const initialState: IInitialState = {
-  query: "",
   currentPage: 0,
   list: [],
 }
@@ -13,9 +12,6 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    changeQuery: (state, { payload }: PayloadAction<string>) => {
-      state.query = payload
-    },
     changeCurrentPage: (state, { payload }: PayloadAction<number>) => {
       state.currentPage = payload
     },
@@ -39,5 +35,5 @@ export const searchSlice = createSlice({
   },
 })
 
-export const { changeQuery, changeCurrentPage } = searchSlice.actions
+export const { changeCurrentPage } = searchSlice.actions
 export default searchSlice.reducer

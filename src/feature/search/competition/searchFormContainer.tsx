@@ -1,13 +1,15 @@
-import { useCallback } from "react"
+import { useState, useCallback } from "react"
 import { PAGE_UNIT, LIST_UNIT } from "util/constant"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import SearchForm from "component/search/SearchForm"
 import { getCompetitionByName } from "../thunk"
-import { changeQuery } from "../slice"
 
 function SearchFormContainer(): JSX.Element {
+  // redux
   const dispatch = useAppDispatch()
-  const query = useAppSelector((state) => state.search.query)
+
+  // useState
+  const [query, setQuery] = useState("")
 
   // useCallback
   const searchFormOnSubmit = useCallback(
@@ -25,9 +27,9 @@ function SearchFormContainer(): JSX.Element {
   )
   const searchFormOnChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch(changeQuery(event.target.value))
+      setQuery(event.target.value)
     },
-    [dispatch]
+    []
   )
 
   return (

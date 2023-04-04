@@ -1,11 +1,6 @@
-import { Link, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { Wrapper, BreadcrumbWrapper } from "./style"
 import { Breadcrumb } from "antd"
-
-/*eslint @typescript-eslint/no-explicit-any : ["off"]*/
-function itemRender(route: any) {
-  return <Link to={route.href}>{route.title}</Link>
-}
 
 function LayoutPage(): JSX.Element {
   const items = [
@@ -34,7 +29,7 @@ function LayoutPage(): JSX.Element {
   return (
     <Wrapper>
       <BreadcrumbWrapper>
-        <Breadcrumb items={items} itemRender={itemRender} />
+        <Breadcrumb items={items} />
       </BreadcrumbWrapper>
       <Outlet />
     </Wrapper>

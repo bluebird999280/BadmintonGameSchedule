@@ -4,7 +4,6 @@
 
 // slice type
 export interface IInitialState {
-  query: string
   currentPage: number
   list: IDataList[][]
 }
