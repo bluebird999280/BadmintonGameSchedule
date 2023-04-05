@@ -1,44 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { getCompetitionByName } from "./thunk"
+import { getCompetitionByName, getClubListByCompetition } from "./thunk"
 import { LIST_UNIT } from "util/constant"
 import {
   IInitialState,
-  IChangeCurrentPagePayload,
-  IGetCompetitionByNamePayload,
+  IGetCompetitionByNameResponse,
+  IGetClubListByCompetitionResponse,
 } from "./type"
 
 const initialState: IInitialState = {
-  competition: {
-    list: [],
-    currentPage: 0,
-  },
-  club: {
-    list: [],
-    currentPage: 0,
-  },
-  team: {
-    list: [],
-    currentPage: 0,
-  },
+  competitionList: [],
+  teamListByClub: {},
 }
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {
-    changeCurrentPage: (
-      state,
-      {
-        payload: { name, currentPage },
-      }: PayloadAction<IChangeCurrentPagePayload>
-    ) => {
-      state[name].currentPage = currentPage
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(
       getCompetitionByName.fulfilled,
-      (state, action: PayloadAction<IGetCompetitionByNamePayload>) => {
+      (state, action: PayloadAction<IGetCompetitionByNameResponse>) => {
         const temp = []
         const resultList = action.payload.data_list
 
@@ -48,11 +29,22 @@ export const searchSlice = createSlice({
         for (let i = 0; i < length / LIST_UNIT; i++)
           temp.push(resultList.slice(i * LIST_UNIT, (i + 1) * LIST_UNIT))
 
-        state.competition.list = temp
+        state.competitionList = temp
       }
-    )
+    ),
+      builder.addCase(
+        getClubListByCompetition.fulfilled,
+        (state, action: PayloadAction<IGetClubListByCompetitionResponse>) => {
+          const { data_list } = action.payload
+
+          state.teamListByClub = {}
+          for (let i = 0; i < data_list.length; i++) {
+            const clubName = data_list[i][0].CLUB_NM1
+            state.teamListByClub[clubName] = data_list[i]
+          }
+        }
+      )
   },
 })
 
-export const { changeCurrentPage } = searchSlice.actions
 export default searchSlice.reducer

@@ -43,37 +43,59 @@ export interface ICompetitionData {
   TOUR_SUPPORT: string
 }
 
+export interface ITeamData {
+  EVENT_ID: string
+  EVENT_NM: string
+  GENDER: string
+  AGE: string
+  GRADE: string
+  ENTRY_ID: string
+  SEED: string
+  PLAYER_ID: string
+  CLUB_NM1: string
+  PLAYER_NM1: string
+  NICK_NM1: string | null
+  GENDER1: string
+  PARTNER_ID: string
+  CLUB_NM2: string
+  PLAYER_NM2: string
+  NICK_NM2: string | null
+  GENDER2: string
+  REG_DATE: string
+  CHG_DATE: string
+  POINT_YN: string
+  ADVANTAGE: string
+  MATCH_OPEN_YN: string
+}
+
 // slice type
 export interface IInitialState {
-  competition: {
-    list: ICompetitionData[][]
-    currentPage: number
-  }
-  club: {
-    list: any[]
-    currentPage: number
-  }
-  team: {
-    list: any[]
-    currentPage: number
+  competitionList: ICompetitionData[][]
+  teamListByClub: {
+    [club: string]: ITeamData[]
   }
 }
 
-export interface IChangeCurrentPagePayload {
-  name: "competition" | "club" | "team"
-  currentPage: number
-}
-
-export interface IGetCompetitionByNamePayload {
+export interface IGetCompetitionByNameResponse {
   data_list: IDataList[]
   gymList: any[]
   fileList: any[]
   ResultCode: string
 }
 
+export interface IGetClubListByCompetitionResponse {
+  data_total: number
+  data_list: ITeamData[][]
+  ResultCode: string
+}
+
 // thunk type
-export interface IgetCompetitionByName {
+export interface IGetCompetitionByName {
   query: string
   pageStart: number
   pageLimit: number
+}
+
+export interface IGetClubListByCompetition {
+  competitionId?: string
 }
