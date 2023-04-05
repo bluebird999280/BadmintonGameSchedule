@@ -4,14 +4,18 @@ import { changeCompetition } from "feature/schedule/slice"
 import { ICompetitionData } from "../type"
 import Row from "component/search/Row"
 
-function SearchListContainer(): JSX.Element {
+interface ISearchListContainerProps {
+  currentPage: number
+}
+
+function SearchListContainer({
+  currentPage,
+}: ISearchListContainerProps): JSX.Element {
   const dispatch = useAppDispatch()
-  const { list, currentPage, selectedCompetition } = useAppSelector(
-    (state) => ({
-      ...state.search.competition,
-      selectedCompetition: state.schedule.competition,
-    })
-  )
+  const { list, selectedCompetition } = useAppSelector((state) => ({
+    list: state.search.competitionList,
+    selectedCompetition: state.schedule.competition,
+  }))
 
   const rowOnClick = useCallback(
     (competition: ICompetitionData) => () => {
