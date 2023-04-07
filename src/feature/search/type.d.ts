@@ -68,12 +68,15 @@ export interface ITeamData {
   MATCH_OPEN_YN: string
 }
 
+export interface IClubList {
+  name: string
+  teamList: ITeamData[]
+}
+
 // slice type
 export interface IInitialState {
   competitionList: ICompetitionData[][]
-  teamListByClub: {
-    [club: string]: ITeamData[]
-  }
+  clubList: IClubList[]
 }
 
 export interface IGetCompetitionByNameResponse {

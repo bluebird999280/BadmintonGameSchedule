@@ -9,7 +9,7 @@ import {
 
 const initialState: IInitialState = {
   competitionList: [],
-  teamListByClub: {},
+  clubList: [],
 }
 
 export const searchSlice = createSlice({
@@ -37,10 +37,13 @@ export const searchSlice = createSlice({
         (state, action: PayloadAction<IGetClubListByCompetitionResponse>) => {
           const { data_list } = action.payload
 
-          state.teamListByClub = {}
+          state.clubList = []
           for (let i = 0; i < data_list.length; i++) {
             const clubName = data_list[i][0].CLUB_NM1
-            state.teamListByClub[clubName] = data_list[i]
+            state.clubList.push({
+              name: clubName,
+              teamList: data_list[i],
+            })
           }
         }
       )
