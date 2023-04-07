@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from "react"
 import { PAGE_UNIT, LIST_UNIT } from "util/constant"
 import { useAppSelector } from "hook/redux"
-import PaginationList from "component/search/PaginationList"
+import PaginationList from "component/search/CompetitionPaginationList"
 
 interface PagenationContainerProps {
   currentPage: number
-  changeCurrentPage: (to: number) => () => void
+  changeCurrentPage: (to: number) => void
 }
 
 function PagenationContainer({
@@ -17,16 +17,28 @@ function PagenationContainer({
   }))
 
   const currentPageRange = useMemo(
-    () => Math.floor(currentPage / LIST_UNIT),
+    () => Math.floor(currentPage / PAGE_UNIT),
     [currentPage]
   )
 
-  const pagenationButtonOnClick = useCallback(
+  const currentPageIndex = useMemo(
+    () => currentPageRange * PAGE_UNIT,
+    [currentPageRange]
+  )
+  const pageRange = useMemo(() => {
+    const nextPageIndex = currentPageIndex + PAGE_UNIT
+
+    if (nextPageIndex <= pageListLength) return PAGE_UNIT
+    return PAGE_UNIT - nextPageIndex + pageListLength
+  }, [pageListLength, currentPageIndex])
+
+  const onClick = useCallback(
     (page: number) => () => {
       changeCurrentPage(page)
     },
-    []
+    [changeCurrentPage]
   )
+
   const movePrevPagenationList = useCallback(() => {
     changeCurrentPage((currentPageRange - 1) * PAGE_UNIT)
   }, [changeCurrentPage, currentPageRange])
@@ -38,8 +50,10 @@ function PagenationContainer({
   return (
     <PaginationList
       length={pageListLength}
+      pageRange={pageRange}
+      currentPageIndex={currentPageIndex}
       currentPageRange={currentPageRange}
-      onClick={pagenationButtonOnClick}
+      onClick={onClick}
       movePrev={movePrevPagenationList}
       moveNext={moveNextPagenationList}
     />

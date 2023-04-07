@@ -5,22 +5,41 @@ import PaginationList from "component/search/PaginationList"
 
 interface PagenationContainerProps {
   currentPage: number
-  changeCurrentPage: (to: number) => () => void
+  changeCurrentPage: (to: number) => void
 }
 
 function PagenationContainer({
   currentPage,
   changeCurrentPage,
 }: PagenationContainerProps): JSX.Element {
-  const { list } = useAppSelector((state) => ({
-    list: state.search.clubList.filter((club) => club.searched),
+  const { pageListLength } = useAppSelector((state) => ({
+    pageListLength: state.search.clubList.filter((club) => club.searched)
+      .length,
   }))
 
-  const pageListLength = useMemo(() => list.length, [list])
-
   const currentPageRange = useMemo(
-    () => Math.floor(currentPage / LIST_UNIT),
+    () => Math.floor(currentPage / PAGE_UNIT),
     [currentPage]
+  )
+
+  const currentPageIndex = useMemo(
+    () => currentPageRange * PAGE_UNIT,
+    [currentPageRange]
+  )
+
+  const pageRange = useMemo(() => {
+    const nextPageIndex = currentPageIndex + PAGE_UNIT
+    const pageLength = Math.ceil(pageListLength / LIST_UNIT)
+
+    if (nextPageIndex <= pageLength) return PAGE_UNIT
+    return PAGE_UNIT - nextPageIndex + pageLength
+  }, [pageListLength, currentPageIndex])
+
+  const onClick = useCallback(
+    (page: number) => () => {
+      changeCurrentPage(page)
+    },
+    [changeCurrentPage]
   )
 
   const movePrevPagenationList = useCallback(() => {
@@ -34,8 +53,10 @@ function PagenationContainer({
   return (
     <PaginationList
       length={pageListLength}
+      pageRange={pageRange}
+      currentPageIndex={currentPageIndex}
       currentPageRange={currentPageRange}
-      onClick={changeCurrentPage}
+      onClick={onClick}
       movePrev={movePrevPagenationList}
       moveNext={moveNextPagenationList}
     />

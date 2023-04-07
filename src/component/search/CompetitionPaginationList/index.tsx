@@ -35,7 +35,7 @@ function PaginationList({
           onClick={onClick(currentPageIndex + index)}
         />
       ))}
-      {length > (currentPageRange + 1) * PAGE_UNIT * LIST_UNIT && (
+      {length > (currentPageRange + 1) * PAGE_UNIT && (
         <PaginationButton index=">" onClick={moveNext} />
       )}
     </ButtonWrapper>

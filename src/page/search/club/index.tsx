@@ -6,12 +6,9 @@ import { useState, useCallback } from "react"
 function SearchClubPage(): JSX.Element {
   const [currentPage, setCurrentPage] = useState(0)
 
-  const changeCurrentPage = useCallback(
-    (page: number) => () => {
-      setCurrentPage(page)
-    },
-    []
-  )
+  const changeCurrentPage = useCallback((page: number) => {
+    setCurrentPage(page)
+  }, [])
 
   return (
     <>
