@@ -15,7 +15,12 @@ const initialState: IInitialState = {
 export const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleSelection: (state, action: PayloadAction<number>) => {
+      state.clubList[action.payload].selected =
+        !state.clubList[action.payload].selected
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       getCompetitionByName.fulfilled,
@@ -51,4 +56,5 @@ export const searchSlice = createSlice({
   },
 })
 
+export const { toggleSelection } = searchSlice.actions
 export default searchSlice.reducer

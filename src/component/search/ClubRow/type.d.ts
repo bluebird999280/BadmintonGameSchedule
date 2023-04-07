@@ -2,10 +2,10 @@ import { ITeamData } from "feature/search/type"
 
 export interface IRowProps {
   data: IClubList
-  selected: boolean
+  selected?: boolean
   onClick: () => void
 }
 
-export interface IWrapperProps {
-  selected: boolean
+export interface ITextContainerProps {
+  selected?: boolean
 }

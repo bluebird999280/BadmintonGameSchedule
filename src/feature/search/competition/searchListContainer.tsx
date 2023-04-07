@@ -2,7 +2,7 @@ import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import { changeCompetition } from "feature/schedule/slice"
 import { ICompetitionData } from "../type"
-import Row from "component/search/Row"
+import Row from "component/search/CompetitionRow"
 
 interface ISearchListContainerProps {
   currentPage: number

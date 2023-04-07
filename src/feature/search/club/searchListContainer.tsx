@@ -1,9 +1,8 @@
-import { useAppDispatch, useAppSelector } from "hook/redux"
-import Row from "component/search/ClubRow"
+import { useCallback } from "react"
+import { useAppSelector, useAppDispatch } from "hook/redux"
 import { LIST_UNIT } from "util/constant"
-import { Collapse } from "antd"
-
-const { Panel } = Collapse
+import Row from "component/search/ClubRow"
+import { toggleSelection } from "../slice"
 
 interface ISearchListContainerProps {
   currentPage: number
@@ -12,6 +11,7 @@ interface ISearchListContainerProps {
 function SearchListContainer({
   currentPage,
 }: ISearchListContainerProps): JSX.Element {
+  const dispatch = useAppDispatch()
   const { list } = useAppSelector((state) => ({
     list: state.search.clubList.slice(
       currentPage * LIST_UNIT,
@@ -19,23 +19,24 @@ function SearchListContainer({
     ),
   }))
 
+  const toggleClubSelection = useCallback(
+    (index: number) => () => {
+      dispatch(toggleSelection(currentPage * LIST_UNIT + index))
+    },
+    [dispatch, currentPage]
+  )
+
   return (
-    <Collapse>
-      {list.map((club) => (
-        <Panel header={club.name} key={club.name}>
-          {club.teamList.map((team) => (
-            <Row
-              key={team.ENTRY_ID}
-              data={team}
-              selected
-              onClick={() => {
-                console.log(1)
-              }}
-            />
-          ))}
-        </Panel>
+    <>
+      {list.map((club, index) => (
+        <Row
+          key={club.name}
+          data={club}
+          selected={club.selected}
+          onClick={toggleClubSelection(index)}
+        />
       ))}
-    </Collapse>
+    </>
   )
 }
 

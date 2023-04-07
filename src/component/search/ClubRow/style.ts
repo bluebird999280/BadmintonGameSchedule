@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components"
-import { IWrapperProps } from "./type"
+import { ITextContainerProps } from "./type"
 
-export const Wrapper = styled.div<IWrapperProps>`
+export const Wrapper = styled.div`
   display: flex;
   cursor: pointer;
   margin: 10px 10px 15px 10px;
@@ -16,23 +16,15 @@ export const Wrapper = styled.div<IWrapperProps>`
   &:hover {
     box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.55);
   }
-
-  ${(props) =>
-    props.selected &&
-    css`
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 3px 3px 3px 1px rgba(180, 67, 101, 0.85);
-    `}
 `
 
-export const TextContainer = styled.div`
+export const TextContainer = styled.div<ITextContainerProps>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   padding: 20px;
   & .title {
-    color: #333;
     font-size: 16px;
     font-weight: 500;
   }
@@ -40,4 +32,11 @@ export const TextContainer = styled.div`
     font-size: 15px;
     font-weight: 500;
   }
+
+  ${(props) =>
+    props.selected &&
+    css`
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+    `}
 `
