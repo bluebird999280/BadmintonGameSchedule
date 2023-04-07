@@ -1,7 +1,7 @@
 import { ITeamData } from "feature/search/type"
 
 export interface IRowProps {
-  data: ITeamData
+  data: IClubList
   selected: boolean
   onClick: () => void
 }
