@@ -28,14 +28,18 @@ function SearchListContainer({
 
   return (
     <>
-      {list.map((club, index) => (
-        <Row
-          key={club.name}
-          data={club}
-          selected={club.selected}
-          onClick={toggleClubSelection(index)}
-        />
-      ))}
+      {list !== undefined &&
+        list.map(
+          (club, index) =>
+            club.searched && (
+              <Row
+                key={club.name}
+                data={club}
+                selected={club.selected}
+                onClick={toggleClubSelection(index)}
+              />
+            )
+        )}
     </>
   )
 }
