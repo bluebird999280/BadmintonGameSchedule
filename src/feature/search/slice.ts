@@ -1,29 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { getCompetitionByName } from "./thunk"
+import { getCompetitionByName, getClubListByCompetition } from "./thunk"
 import { LIST_UNIT } from "util/constant"
-import { IInitialState, IGetCompetitionByNamePayload } from "./type"
+import {
+  IInitialState,
+  IGetCompetitionByNameResponse,
+  IGetClubListByCompetitionResponse,
+} from "./type"
 
 const initialState: IInitialState = {
-  query: "",
-  currentPage: 0,
-  list: [],
+  competitionList: [],
+  clubList: [],
 }
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    changeQuery: (state, { payload }: PayloadAction<string>) => {
-      state.query = payload
-    },
-    changeCurrentPage: (state, { payload }: PayloadAction<number>) => {
-      state.currentPage = payload
+    toggleSelection: (state, action: PayloadAction<number>) => {
+      state.clubList[action.payload].selected =
+        !state.clubList[action.payload].selected
     },
   },
   extraReducers: (builder) => {
     builder.addCase(
       getCompetitionByName.fulfilled,
-      (state, action: PayloadAction<IGetCompetitionByNamePayload>) => {
+      (state, action: PayloadAction<IGetCompetitionByNameResponse>) => {
         const temp = []
         const resultList = action.payload.data_list
 
@@ -33,11 +34,27 @@ export const searchSlice = createSlice({
         for (let i = 0; i < length / LIST_UNIT; i++)
           temp.push(resultList.slice(i * LIST_UNIT, (i + 1) * LIST_UNIT))
 
-        state.list = temp
+        state.competitionList = temp
       }
-    )
+    ),
+      builder.addCase(
+        getClubListByCompetition.fulfilled,
+        (state, action: PayloadAction<IGetClubListByCompetitionResponse>) => {
+          const { data_list } = action.payload
+
+          state.clubList = []
+          for (let i = 0; i < data_list.length; i++) {
+            const clubName = data_list[i][0].CLUB_NM1
+            state.clubList.push({
+              name: clubName,
+              count: data_list[i].length,
+              teamList: data_list[i],
+            })
+          }
+        }
+      )
   },
 })
 
-export const { changeQuery, changeCurrentPage } = searchSlice.actions
+export const { toggleSelection } = searchSlice.actions
 export default searchSlice.reducer

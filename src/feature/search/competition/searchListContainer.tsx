@@ -1,17 +1,24 @@
-import { useCallback, useMemo } from "react"
+import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import { changeCompetition } from "feature/schedule/slice"
-import { IDataList } from "../type"
-import Row from "component/search/Row"
+import { ICompetitionData } from "../type"
+import Row from "component/search/CompetitionRow"
 
-function SearchListContainer(): JSX.Element {
+interface ISearchListContainerProps {
+  currentPage: number
+}
+
+function SearchListContainer({
+  currentPage,
+}: ISearchListContainerProps): JSX.Element {
   const dispatch = useAppDispatch()
-  const { list, currentPage } = useAppSelector((state) => ({
-    ...state.search,
+  const { list, selectedCompetition } = useAppSelector((state) => ({
+    list: state.search.competitionList,
+    selectedCompetition: state.schedule.competition,
   }))
 
   const rowOnClick = useCallback(
-    (competition: IDataList) => () => {
+    (competition: ICompetitionData) => () => {
       dispatch(changeCompetition(competition))
     },
     [dispatch]
@@ -21,7 +28,12 @@ function SearchListContainer(): JSX.Element {
     <>
       {list[currentPage] !== undefined &&
         list[currentPage].map((data, key) => (
-          <Row key={key} data={data} onClick={rowOnClick(data)} />
+          <Row
+            key={key}
+            data={data}
+            selected={selectedCompetition === data}
+            onClick={rowOnClick(data)}
+          />
         ))}
     </>
   )
