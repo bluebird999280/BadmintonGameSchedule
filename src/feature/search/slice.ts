@@ -42,6 +42,7 @@ export const searchSlice = createSlice({
             const clubName = data_list[i][0].CLUB_NM1
             state.clubList.push({
               name: clubName,
+              count: data_list[i].length,
               teamList: data_list[i],
             })
           }

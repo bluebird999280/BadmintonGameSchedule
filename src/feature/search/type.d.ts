@@ -70,6 +70,7 @@ export interface ITeamData {
 
 export interface IClubList {
   name: string
+  count: number
   teamList: ITeamData[]
 }
 
