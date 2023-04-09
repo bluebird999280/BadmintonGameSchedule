@@ -5,6 +5,7 @@ import {
   IInitialState,
   IGetCompetitionByNameResponse,
   IGetClubListByCompetitionResponse,
+  IToggleTeamSelection,
 } from "./type"
 
 const initialState: IInitialState = {
@@ -19,6 +20,14 @@ export const searchSlice = createSlice({
     toggleSelection: (state, action: PayloadAction<number>) => {
       state.clubList[action.payload].selected =
         !state.clubList[action.payload].selected
+    },
+    toggleTeamSelection: (
+      state,
+      action: PayloadAction<IToggleTeamSelection>
+    ) => {
+      const { clubIndex, teamIndex } = action.payload
+      state.clubList[clubIndex].teamList[teamIndex].selected =
+        !state.clubList[clubIndex].teamList[teamIndex].selected
     },
     divideClubListByQuery: (state, action: PayloadAction<string>) => {
       state.clubList.map((club) => {
@@ -66,5 +75,6 @@ export const searchSlice = createSlice({
   },
 })
 
-export const { toggleSelection, divideClubListByQuery } = searchSlice.actions
+export const { toggleSelection, toggleTeamSelection, divideClubListByQuery } =
+  searchSlice.actions
 export default searchSlice.reducer

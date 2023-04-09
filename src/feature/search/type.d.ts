@@ -73,13 +73,20 @@ export interface IClubList {
   count: number
   selected?: boolean
   searched: boolean
-  teamList: ITeamData[]
+  teamList: (ITeamData & {
+    selected?: boolean
+  })[]
 }
 
 // slice type
 export interface IInitialState {
   competitionList: ICompetitionData[][]
   clubList: IClubList[]
+}
+
+export interface IToggleTeamSelection {
+  clubIndex: number
+  teamIndex: number
 }
 
 export interface IGetCompetitionByNameResponse {
