@@ -72,6 +72,7 @@ export interface IClubList {
   name: string
   count: number
   selected?: boolean
+  searched: boolean
   teamList: ITeamData[]
 }
 

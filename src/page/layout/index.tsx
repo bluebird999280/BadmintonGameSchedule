@@ -1,7 +1,7 @@
 /*eslint @typescript-eslint/no-explicit-any : ["off"]*/
-
-import { Link, Outlet } from "react-router-dom"
-import { Wrapper, BreadcrumbWrapper } from "./style"
+import { useState, useEffect } from "react"
+import { Link, Outlet, useLocation } from "react-router-dom"
+import { Wrapper, BreadcrumbWrapper, Container } from "./style"
 import { Breadcrumb } from "antd"
 
 function itemRender(route: any) {
@@ -9,6 +9,8 @@ function itemRender(route: any) {
 }
 
 function LayoutPage(): JSX.Element {
+  const { pathname } = useLocation()
+  const [title, setTitle] = useState("홈")
   const items = [
     {
       title: "홈",
@@ -32,11 +34,40 @@ function LayoutPage(): JSX.Element {
     },
   ]
 
+  useEffect(() => {
+    switch (pathname) {
+      case "/":
+        setTitle("홈")
+        break
+      case "/search/competition":
+        setTitle("대회 검색")
+        break
+      case "/search/club":
+        setTitle("클럽 검색")
+        break
+      case "/search/team":
+        setTitle("팀 검색")
+        break
+      case "/schedule":
+        setTitle("시간표")
+        break
+    }
+  }, [pathname])
+
   return (
     <Wrapper>
-      <BreadcrumbWrapper>
-        <Breadcrumb items={items} itemRender={itemRender} />
-      </BreadcrumbWrapper>
+      <Container>
+        <div className="title">{title}</div>
+        <BreadcrumbWrapper>
+          <Breadcrumb
+            items={items}
+            itemRender={itemRender}
+            style={{
+              fontSize: "20px",
+            }}
+          />
+        </BreadcrumbWrapper>
+      </Container>
       <Outlet />
     </Wrapper>
   )

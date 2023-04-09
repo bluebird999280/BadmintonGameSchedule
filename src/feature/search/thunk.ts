@@ -23,7 +23,7 @@ export const getCompetitionByName = createAsyncThunk(
 
 export const getClubListByCompetition = createAsyncThunk(
   "search/getClubListByCompetition",
-  async ({ competitionId }: IGetClubListByCompetition) => {
+  async ({ competitionId }: IGetClubListByCompetition, thunkAPI) => {
     const response = await axiosInstance({
       method: "post",
       url: "usp_get_entry_list_by_group.php",
@@ -34,6 +34,10 @@ export const getClubListByCompetition = createAsyncThunk(
         }),
       },
     })
+
+    const { data_list } = response.data
+
+    if (data_list[0].CLUB_NM1 === null) thunkAPI.rejectWithValue("no data")
 
     return response.data
   }

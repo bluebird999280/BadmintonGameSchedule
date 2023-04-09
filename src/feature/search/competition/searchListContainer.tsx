@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "hook/redux"
 import { changeCompetition } from "feature/schedule/slice"
 import { ICompetitionData } from "../type"
 import Row from "component/search/CompetitionRow"
+import { getClubListByCompetition } from "../thunk"
 
 interface ISearchListContainerProps {
   currentPage: number
@@ -20,6 +21,9 @@ function SearchListContainer({
   const rowOnClick = useCallback(
     (competition: ICompetitionData) => () => {
       dispatch(changeCompetition(competition))
+      dispatch(
+        getClubListByCompetition({ competitionId: competition?.TOURNAMENT_ID })
+      )
     },
     [dispatch]
   )

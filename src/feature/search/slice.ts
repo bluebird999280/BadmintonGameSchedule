@@ -20,6 +20,15 @@ export const searchSlice = createSlice({
       state.clubList[action.payload].selected =
         !state.clubList[action.payload].selected
     },
+    divideClubListByQuery: (state, action: PayloadAction<string>) => {
+      state.clubList.map((club) => {
+        if (club.name.search(action.payload) >= 0) {
+          club.searched = true
+        } else {
+          club.searched = false
+        }
+      })
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -49,6 +58,7 @@ export const searchSlice = createSlice({
               name: clubName,
               count: data_list[i].length,
               teamList: data_list[i],
+              searched: true,
             })
           }
         }
@@ -56,5 +66,5 @@ export const searchSlice = createSlice({
   },
 })
 
-export const { toggleSelection } = searchSlice.actions
+export const { toggleSelection, divideClubListByQuery } = searchSlice.actions
 export default searchSlice.reducer

@@ -13,10 +13,7 @@ function SearchListContainer({
 }: ISearchListContainerProps): JSX.Element {
   const dispatch = useAppDispatch()
   const { list } = useAppSelector((state) => ({
-    list: state.search.clubList.slice(
-      currentPage * LIST_UNIT,
-      (currentPage + 1) * LIST_UNIT
-    ),
+    list: state.search.clubList.filter((club) => club.searched),
   }))
 
   const toggleClubSelection = useCallback(
@@ -28,14 +25,17 @@ function SearchListContainer({
 
   return (
     <>
-      {list.map((club, index) => (
-        <Row
-          key={club.name}
-          data={club}
-          selected={club.selected}
-          onClick={toggleClubSelection(index)}
-        />
-      ))}
+      {list !== undefined &&
+        list
+          .slice(currentPage * LIST_UNIT, (currentPage + 1) * LIST_UNIT)
+          .map((club, index) => (
+            <Row
+              key={club.name}
+              data={club}
+              selected={club.selected}
+              onClick={toggleClubSelection(index)}
+            />
+          ))}
     </>
   )
 }
