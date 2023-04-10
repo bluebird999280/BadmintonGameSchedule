@@ -5,7 +5,11 @@ import { toggleTeamSelection } from "../slice"
 
 const { Panel } = Collapse
 
-function ListContainer(): JSX.Element {
+interface IProps {
+  query: string
+}
+
+function ListContainer({ query }: IProps): JSX.Element {
   const dispatch = useAppDispatch()
   const { list } = useAppSelector((state) => ({
     list: state.search.clubList,
@@ -17,7 +21,6 @@ function ListContainer(): JSX.Element {
     },
     [dispatch]
   )
-
   return (
     <div>
       <Collapse>
@@ -28,15 +31,24 @@ function ListContainer(): JSX.Element {
                 <List
                   itemLayout="horizontal"
                   dataSource={club.teamList}
-                  renderItem={(item, teamIndex) => (
-                    <List.Item onClick={selectTeam(clubIndex, teamIndex)}>
-                      <List.Item.Meta
-                        title={`${item.PLAYER_NM1} & ${item.PLAYER_NM2}`}
-                        description={`${item.EVENT_NM}`}
-                      ></List.Item.Meta>
-                      <Checkbox checked={item.selected} />
-                    </List.Item>
-                  )}
+                  renderItem={(item, teamIndex) => {
+                    if (
+                      item.PLAYER_NM1.search(query) !== -1 ||
+                      item.PLAYER_NM2.search(query) !== -1
+                    )
+                      return (
+                        <List.Item
+                          className="list"
+                          onClick={selectTeam(clubIndex, teamIndex)}
+                        >
+                          <List.Item.Meta
+                            title={`${item.PLAYER_NM1} & ${item.PLAYER_NM2}`}
+                            description={`${item.EVENT_NM}`}
+                          ></List.Item.Meta>
+                          <Checkbox checked={item.selected} />
+                        </List.Item>
+                      )
+                  }}
                 />
               </Panel>
             )
