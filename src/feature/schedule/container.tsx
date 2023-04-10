@@ -2,28 +2,61 @@ import TimeTable from "./component/TimeTable"
 import ClubList from "./component/ClubList"
 import TeamList from "./component/TeamList"
 import { Wrapper, Container } from "./style"
-import { useMemo, useEffect } from "react"
+import { useEffect, useMemo } from "react"
 import { getAllGameList } from "./thunk"
 import { useAppSelector, useAppDispatch } from "hook/redux"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { clubList } = useAppSelector((state) => ({
-    clubList: state.search.clubList,
-  }))
-
-  const selectedClubList = useMemo(
-    () => clubList.filter((club) => club.selected),
-    [clubList]
+  const { tournamentId, selectedClubList, gameList } = useAppSelector(
+    (state) => ({
+      tournamentId: state.schedule.competition?.TOURNAMENT_ID,
+      selectedClubList: state.search.clubList.filter((club) => club.selected),
+      gameList: state.schedule.gameList,
+    })
   )
 
-  useEffect(() => {
-    dispatch(
-      getAllGameList({
-        tournamentId: "TM_20220507170501",
-        planDate: "",
+  const checkTable = useMemo(() => {
+    const temp: any = {}
+    selectedClubList.map((selectedClub) => {
+      selectedClub.teamList.map((team) => {
+        if (team.selected) {
+          if (temp[team.EVENT_ID] === undefined)
+            temp[team.EVENT_ID] = { [team.ENTRY_ID]: true }
+          else temp[team.EVENT_ID][team.ENTRY_ID] = true
+        }
       })
-    )
+    })
+    return temp
+  }, [selectedClubList])
+
+  const gameListBySelectedTeamList = useMemo(() => {
+    const { data_list } = gameList
+
+    if (data_list !== undefined)
+      return data_list.filter((data) => {
+        if (checkTable[data.EVENT_ID] !== undefined) {
+          return (
+            checkTable[data.EVENT_ID][data.TEAM1_ENTRY_ID] === true ||
+            checkTable[data.EVENT_ID][data.TEAM2_ENTRY_ID] === true
+          )
+        }
+        return false
+      })
+  }, [checkTable, gameList])
+
+  useEffect(() => {
+    console.log(gameListBySelectedTeamList)
+  }, [gameListBySelectedTeamList])
+
+  useEffect(() => {
+    if (tournamentId !== undefined)
+      dispatch(
+        getAllGameList({
+          tournamentId,
+          planDate: "",
+        })
+      )
   }, [dispatch])
 
   return (

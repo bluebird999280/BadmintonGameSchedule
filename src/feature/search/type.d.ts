@@ -66,6 +66,7 @@ export interface ITeamData {
   POINT_YN: string
   ADVANTAGE: string
   MATCH_OPEN_YN: string
+  selected?: boolean
 }
 
 export interface IClubList {
@@ -73,9 +74,7 @@ export interface IClubList {
   count: number
   selected?: boolean
   searched: boolean
-  teamList: (ITeamData & {
-    selected?: boolean
-  })[]
+  teamList: ITeamData[]
 }
 
 // slice type
