@@ -18,6 +18,11 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     toggleSelection: (state, action: PayloadAction<number>) => {
+      if (state.clubList[action.payload].selected) {
+        state.clubList[action.payload].teamList.map(
+          (club) => (club.selected = false)
+        )
+      }
       state.clubList[action.payload].selected =
         !state.clubList[action.payload].selected
     },
