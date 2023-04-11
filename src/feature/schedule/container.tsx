@@ -1,6 +1,5 @@
 import TimeTable from "./component/TimeTable"
-import ClubList from "./component/ClubList"
-import TeamList from "./component/TeamList"
+import DateSelection from "./component/DateSelection"
 import { Wrapper, Container } from "./style"
 import { useEffect, useMemo } from "react"
 import { getAllGameList } from "./thunk"
@@ -58,9 +57,8 @@ function Schedule(): JSX.Element {
   return (
     <Wrapper>
       <Container>
+        <DateSelection />
         <TimeTable list={gameListBySelectedTeamList}></TimeTable>
-        {/* <ClubList></ClubList>
-        <TeamList></TeamList> */}
       </Container>
     </Wrapper>
   )
