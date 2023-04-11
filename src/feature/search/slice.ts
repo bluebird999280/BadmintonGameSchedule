@@ -17,15 +17,19 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    toggleSelection: (state, action: PayloadAction<number>) => {
-      if (state.clubList[action.payload].selected) {
-        state.clubList[action.payload].teamList.forEach(
-          (club) => (club.selected = false)
-        )
+    toggleSelection: (state, action: PayloadAction<string>) => {
+      const index = state.clubList.findIndex(
+        (club) => club.name === action.payload
+      )
+      if (index === -1) return
+
+      const currentClub = state.clubList[index]
+      if (currentClub.selected) {
+        currentClub.teamList.forEach((club) => (club.selected = false))
       }
-      state.clubList[action.payload].selected =
-        !state.clubList[action.payload].selected
+      currentClub.selected = !currentClub.selected
     },
+
     toggleTeamSelection: (
       state,
       action: PayloadAction<IToggleTeamSelection>
