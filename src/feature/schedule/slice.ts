@@ -76,7 +76,9 @@ export interface IGetAllGameListResponse {
 
 export interface IGameListProps {
   data_list?: IGetAllGameListResponse[]
-  planDateList?: []
+  planDateList?: {
+    PLAN_DATE: string
+  }[]
   gymList?: []
   startTimeList?: []
   courtList?: []

@@ -1,7 +1,7 @@
 import TimeTable from "./component/TimeTable"
 import DateSelection from "./component/DateSelection"
 import { Wrapper, Container } from "./style"
-import { useEffect, useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { getAllGameList } from "./thunk"
 import { useAppSelector, useAppDispatch } from "hook/redux"
 
@@ -14,6 +14,8 @@ function Schedule(): JSX.Element {
       gameList: state.schedule.gameList,
     })
   )
+
+  const { planDateList } = gameList
 
   const checkTable = useMemo(() => {
     const temp: any = {}
@@ -57,7 +59,7 @@ function Schedule(): JSX.Element {
   return (
     <Wrapper>
       <Container>
-        <DateSelection />
+        <DateSelection planDateList={planDateList} />
         <TimeTable list={gameListBySelectedTeamList}></TimeTable>
       </Container>
     </Wrapper>
