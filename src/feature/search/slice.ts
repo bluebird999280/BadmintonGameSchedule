@@ -52,7 +52,10 @@ export const searchSlice = createSlice({
         const resultList = action.payload.data_list
 
         const { length } = resultList
-        if (length === 0) return
+        if (length === 0) {
+          state.competitionList = []
+          return
+        }
 
         for (let i = 0; i < length / LIST_UNIT; i++)
           temp.push(resultList.slice(i * LIST_UNIT, (i + 1) * LIST_UNIT))
