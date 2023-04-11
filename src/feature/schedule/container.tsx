@@ -46,10 +46,6 @@ function Schedule(): JSX.Element {
   }, [checkTable, gameList])
 
   useEffect(() => {
-    console.log(gameListBySelectedTeamList)
-  }, [gameListBySelectedTeamList])
-
-  useEffect(() => {
     if (tournamentId !== undefined)
       dispatch(
         getAllGameList({
@@ -62,9 +58,9 @@ function Schedule(): JSX.Element {
   return (
     <Wrapper>
       <Container>
-        <TimeTable></TimeTable>
-        <ClubList></ClubList>
-        <TeamList></TeamList>
+        <TimeTable list={gameListBySelectedTeamList}></TimeTable>
+        {/* <ClubList></ClubList>
+        <TeamList></TeamList> */}
       </Container>
     </Wrapper>
   )

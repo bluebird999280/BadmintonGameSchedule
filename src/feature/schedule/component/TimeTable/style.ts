@@ -8,31 +8,27 @@ export const Container = styled.div``
 
 export const TimeLine = styled.div``
 
-export const RepresentativeTime = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 10px 5px;
-  font-size: 18px;
-  border-bottom: 1px solid #f4f2f1;
-`
-
 export const GameListByTime = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 5px 0 rgb(0 0 0 / 15%);
   overflow: hidden;
+  display: inline-block;
 `
 export const GameRow = styled.div`
-  padding: 23px;
   display: flex;
   color: #212529;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   text-align: center;
   border-bottom: 4px solid #f8f9fd;
 
+  & > div {
+    padding: 20px;
+  }
+
   .time {
     min-width: 100px;
+    background-color: rgb(248, 248, 248);
   }
 
   .court {
@@ -40,15 +36,25 @@ export const GameRow = styled.div`
   }
 
   .type {
-    min-width: 200px;
+    min-width: 100px;
+    background-color: rgb(248, 248, 248);
+  }
+
+  .club {
+    min-width: 300px;
   }
 
   .name {
-    min-width: 400px;
+    min-width: 300px;
+    background-color: rgb(248, 248, 248);
   }
 `
 
 export const GameRowHead = styled(GameRow)`
   font-weight: bold;
-  padding: 18px 25px;
+
+  & > div {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
 `
