@@ -28,7 +28,7 @@ function SearchListContainer({
       {list !== undefined &&
         list
           .slice(currentPage * LIST_UNIT, (currentPage + 1) * LIST_UNIT)
-          .map((club, index) => (
+          .map((club) => (
             <Row
               key={club.name}
               data={club}

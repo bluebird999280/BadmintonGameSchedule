@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react"
-import { PAGE_UNIT, LIST_UNIT } from "util/constant"
+import { PAGE_UNIT } from "util/constant"
 import { useAppSelector } from "hook/redux"
 import PaginationList from "component/search/CompetitionPaginationList"
 

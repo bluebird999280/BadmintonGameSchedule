@@ -1,9 +1,10 @@
+import { useEffect, useMemo } from "react"
 import TimeTable from "./component/TimeTable"
 import DateSelection from "./component/DateSelection"
 import { Wrapper, Container } from "./style"
-import { useEffect, useMemo, useState } from "react"
 import { getAllGameList } from "./thunk"
 import { useAppSelector, useAppDispatch } from "hook/redux"
+import { IGameListProps, CheckTableType } from "./type"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
@@ -15,10 +16,8 @@ function Schedule(): JSX.Element {
     })
   )
 
-  const { planDateList } = gameList
-
   const checkTable = useMemo(() => {
-    const temp: any = {}
+    const temp: CheckTableType = {}
     selectedClubList.map((selectedClub) => {
       selectedClub.teamList.map((team) => {
         if (team.selected) {
@@ -31,20 +30,16 @@ function Schedule(): JSX.Element {
     return temp
   }, [selectedClubList])
 
-  const gameListBySelectedTeamList = useMemo(() => {
-    const { data_list } = gameList
-
-    if (data_list !== undefined)
-      return data_list.filter((data) => {
-        if (checkTable[data.EVENT_ID] !== undefined) {
-          return (
-            checkTable[data.EVENT_ID][data.TEAM1_ENTRY_ID] === true ||
-            checkTable[data.EVENT_ID][data.TEAM2_ENTRY_ID] === true
-          )
-        }
-        return false
-      })
-  }, [checkTable, gameList])
+  const gameListBySelectedTeamList = useMemo(
+    () =>
+      (gameList as IGameListProps).data_list.filter(
+        (data) =>
+          checkTable[data.EVENT_ID] !== undefined &&
+          (checkTable[data.EVENT_ID][data.TEAM1_ENTRY_ID] === true ||
+            checkTable[data.EVENT_ID][data.TEAM2_ENTRY_ID] === true)
+      ),
+    [checkTable, gameList]
+  )
 
   useEffect(() => {
     if (tournamentId !== undefined)
@@ -54,12 +49,13 @@ function Schedule(): JSX.Element {
           planDate: "",
         })
       )
-  }, [dispatch])
+  }, [dispatch, tournamentId])
 
+  if (gameList === undefined) return <></>
   return (
     <Wrapper>
       <Container>
-        <DateSelection planDateList={planDateList} />
+        <DateSelection planDateList={gameList.planDateList} />
         <TimeTable list={gameListBySelectedTeamList}></TimeTable>
       </Container>
     </Wrapper>

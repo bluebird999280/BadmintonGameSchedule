@@ -1,5 +1,5 @@
-import { IGetAllGameListResponse } from "./../../slice"
+import { IDataListProps } from "feature/schedule/type"
 
 export interface ITimeTableProps {
-  list?: IGetAllGameListResponse[]
+  list?: IDataListProps[]
 }
