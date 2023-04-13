@@ -1,3 +1,4 @@
+// ResponseData
 export interface ICompetitionData {
   ACCEPT_DATE: string
   ACCEPT_DATE_FROM: string
@@ -42,7 +43,6 @@ export interface ICompetitionData {
   TOUR_SPONSOR: string
   TOUR_SUPPORT: string
 }
-
 export interface ITeamData {
   EVENT_ID: string
   EVENT_NM: string
@@ -69,15 +69,7 @@ export interface ITeamData {
   selected?: boolean
 }
 
-export interface IClubList {
-  name: string
-  count: number
-  selected?: boolean
-  searched: boolean
-  teamList: ITeamData[]
-}
-
-// slice type
+// Slice
 export interface IInitialState {
   competitionList: ICompetitionData[][]
   clubList: IClubList[]
@@ -86,22 +78,18 @@ export interface IInitialState {
   }
 }
 
+export interface IClubList {
+  name: string
+  count: number
+  selected?: boolean
+  searched: boolean
+  teamList: ITeamData[]
+}
+
+// reducer
 export interface IToggleTeamSelection {
   clubIndex: number
   teamIndex: number
-}
-
-export interface IGetCompetitionByNameResponse {
-  data_list: IDataList[]
-  gymList: any[]
-  fileList: any[]
-  ResultCode: string
-}
-
-export interface IGetClubListByCompetitionResponse {
-  data_total: number
-  data_list: ITeamData[][]
-  ResultCode: string
 }
 
 // thunk type

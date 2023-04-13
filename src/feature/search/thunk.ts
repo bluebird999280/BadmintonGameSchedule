@@ -39,9 +39,8 @@ export const getClubListByCompetition = createAsyncThunk(
       },
     })
 
-    const { data_list } = response.data
-
-    if (data_list[0].CLUB_NM1 === null) thunkAPI.rejectWithValue("no data")
+    if (response.data.data_list[0].CLUB_NM1 === null)
+      thunkAPI.rejectWithValue("no data")
 
     return response.data
   }

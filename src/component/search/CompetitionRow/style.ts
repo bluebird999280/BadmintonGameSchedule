@@ -1,11 +1,7 @@
 import styled, { css } from "styled-components"
-import {
-  IProgressBackgroundColor,
-  IWrapperProps,
-  IProgressWrapper,
-} from "./type"
+import { IWrapperProps, IProgressWrapperProps } from "./type"
 
-const progressBackgroundColor: IProgressBackgroundColor = {
+const progressBackgroundColor = {
   schedule: [244, 40, 50],
   progress: [61, 150, 242],
   completion: [102, 102, 102],
@@ -34,7 +30,7 @@ export const Wrapper = styled.div<IWrapperProps>`
      )}, 0.18);};
     `}
 `
-export const ProgressWrapper = styled.div<IProgressWrapper>`
+export const ProgressWrapper = styled.div<IProgressWrapperProps>`
   color: white;
   opacity: 0.7;
   font-weight: 600;
