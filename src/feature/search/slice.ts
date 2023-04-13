@@ -17,7 +17,7 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    toggleSelection: (state, action: PayloadAction<string>) => {
+    toggleClubSelection: (state, action: PayloadAction<string>) => {
       const index = state.clubList.findIndex(
         (club) => club.name === action.payload
       )
@@ -87,6 +87,9 @@ export const searchSlice = createSlice({
   },
 })
 
-export const { toggleSelection, toggleTeamSelection, divideClubListByQuery } =
-  searchSlice.actions
+export const {
+  toggleClubSelection,
+  toggleTeamSelection,
+  divideClubListByQuery,
+} = searchSlice.actions
 export default searchSlice.reducer
