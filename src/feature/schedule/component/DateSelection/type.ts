@@ -1,7 +1,9 @@
+import { IPlanDateProps } from "feature/schedule/type"
+
 export interface IDateSelectionProps {
-  planDateList: {
-    PLAN_DATE: string
-  }[]
+  currentSelectedDate?: string
+  setCurrentSelectedDate: (date: string) => void
+  planDateList: IPlanDateProps[]
 }
 
 export interface IOnClickDateProps {

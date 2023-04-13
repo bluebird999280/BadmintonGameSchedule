@@ -1,10 +1,10 @@
-import { useEffect, useMemo } from "react"
+import { useEffect, useState, useMemo } from "react"
 import TimeTable from "./component/TimeTable"
 import DateSelection from "./component/DateSelection"
 import { Wrapper, Container } from "./style"
 import { getAllGameList } from "./thunk"
 import { useAppSelector, useAppDispatch } from "hook/redux"
-import { IGameListProps, CheckTableType } from "./type"
+import { CheckTableType } from "./type"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
@@ -16,6 +16,10 @@ function Schedule(): JSX.Element {
     })
   )
 
+  // useState
+  const [currentSelectedDate, setCurrentSelectedDate] = useState("")
+
+  // useMemo
   const checkTable = useMemo(() => {
     const temp: CheckTableType = {}
     selectedClubList.map((selectedClub) => {
@@ -30,15 +34,16 @@ function Schedule(): JSX.Element {
     return temp
   }, [selectedClubList])
 
-  const gameListBySelectedTeamList = useMemo(
+  const gameListBySelectedTeamListAndDate = useMemo(
     () =>
-      (gameList as IGameListProps).data_list.filter(
+      gameList?.data_list.filter(
         (data) =>
+          data.PLAN_DATE === currentSelectedDate &&
           checkTable[data.EVENT_ID] !== undefined &&
           (checkTable[data.EVENT_ID][data.TEAM1_ENTRY_ID] === true ||
             checkTable[data.EVENT_ID][data.TEAM2_ENTRY_ID] === true)
       ),
-    [checkTable, gameList]
+    [checkTable, gameList, currentSelectedDate]
   )
 
   useEffect(() => {
@@ -55,8 +60,12 @@ function Schedule(): JSX.Element {
   return (
     <Wrapper>
       <Container>
-        <DateSelection planDateList={gameList.planDateList} />
-        <TimeTable list={gameListBySelectedTeamList}></TimeTable>
+        <DateSelection
+          currentSelectedDate={currentSelectedDate}
+          setCurrentSelectedDate={setCurrentSelectedDate}
+          planDateList={gameList.planDateList}
+        />
+        <TimeTable list={gameListBySelectedTeamListAndDate}></TimeTable>
       </Container>
     </Wrapper>
   )

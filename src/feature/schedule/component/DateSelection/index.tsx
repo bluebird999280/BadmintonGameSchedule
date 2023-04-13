@@ -1,18 +1,19 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { Dropdown, Space } from "antd"
 import { DownOutlined, UpOutlined } from "@ant-design/icons"
 import parseDate from "util/func/parseDate"
 import { IDateSelectionProps, IOnClickDateProps } from "./type"
 import { Wrapper } from "./style"
 
-function DateSelection({ planDateList }: IDateSelectionProps): JSX.Element {
+function DateSelection({
+  currentSelectedDate,
+  setCurrentSelectedDate,
+  planDateList,
+}: IDateSelectionProps): JSX.Element {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
-  const [currentSelectedDate, setCurrentSelectedDate] = useState(
-    parseDate(planDateList[0].PLAN_DATE)
-  )
 
   const onClickDate = useCallback(({ key }: IOnClickDateProps) => {
-    setCurrentSelectedDate(parseDate(key))
+    setCurrentSelectedDate(key)
     setIsDropDownOpen(false)
   }, [])
 
@@ -26,6 +27,10 @@ function DateSelection({ planDateList }: IDateSelectionProps): JSX.Element {
     onClick: onClickDate,
   }))
 
+  useEffect(() => {
+    setCurrentSelectedDate(planDateList[0].PLAN_DATE)
+  }, [planDateList])
+
   return (
     <Wrapper>
       <Dropdown
@@ -35,7 +40,7 @@ function DateSelection({ planDateList }: IDateSelectionProps): JSX.Element {
         onOpenChange={onOpenChange}
       >
         <Space>
-          <h2>{currentSelectedDate}</h2>
+          <h2>{parseDate(currentSelectedDate)}</h2>
           {isDropDownOpen ? <UpOutlined /> : <DownOutlined />}
         </Space>
       </Dropdown>
