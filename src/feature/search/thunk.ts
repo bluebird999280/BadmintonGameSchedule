@@ -4,7 +4,7 @@ import { IGetCompetitionByName, IGetClubListByCompetition } from "./type"
 
 export const getCompetitionByName = createAsyncThunk(
   "search/getCompetitionByName",
-  async ({ query, pageStart, pageLimit }: IGetCompetitionByName) => {
+  async ({ query, pageStart, pageLimit }: IGetCompetitionByName, thunkAPI) => {
     const response = await axiosInstance({
       method: "post",
       url: "mobile_tm_list.php",
@@ -16,6 +16,10 @@ export const getCompetitionByName = createAsyncThunk(
         }),
       },
     })
+
+    if (response.data.data_list.length === 0) {
+      return thunkAPI.rejectWithValue("no data")
+    }
 
     return response.data
   }
@@ -35,9 +39,8 @@ export const getClubListByCompetition = createAsyncThunk(
       },
     })
 
-    const { data_list } = response.data
-
-    if (data_list[0].CLUB_NM1 === null) thunkAPI.rejectWithValue("no data")
+    if (response.data.data_list[0].CLUB_NM1 === null)
+      thunkAPI.rejectWithValue("no data")
 
     return response.data
   }

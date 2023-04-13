@@ -2,7 +2,7 @@ import { useCallback } from "react"
 import { useAppSelector, useAppDispatch } from "hook/redux"
 import { LIST_UNIT } from "util/constant"
 import Row from "component/search/ClubRow"
-import { toggleSelection } from "../slice"
+import { toggleClubSelection } from "../slice"
 
 interface ISearchListContainerProps {
   currentPage: number
@@ -16,9 +16,9 @@ function SearchListContainer({
     list: state.search.clubList.filter((club) => club.searched),
   }))
 
-  const toggleClubSelection = useCallback(
+  const clickClub = useCallback(
     (clubName: string) => () => {
-      dispatch(toggleSelection(clubName))
+      dispatch(toggleClubSelection(clubName))
     },
     [dispatch, currentPage]
   )
@@ -33,7 +33,7 @@ function SearchListContainer({
               key={club.name}
               data={club}
               selected={club.selected}
-              onClick={toggleClubSelection(club.name)}
+              onClick={clickClub(club.name)}
             />
           ))}
     </>

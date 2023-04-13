@@ -8,14 +8,11 @@ export interface IRowProps {
   onClick: () => void
 }
 
-export interface IProgressBackgroundColor {
-  [key: string]: number[]
-}
 export interface IWrapperProps {
   selected: boolean
   type: progressType
 }
 
-export interface IProgressWrapper {
+export interface IProgressWrapperProps {
   type: progressType
 }

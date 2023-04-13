@@ -1,16 +1,7 @@
 import { ButtonWrapper } from "./style"
 import PaginationButton from "../PaginationButton"
 import { LIST_UNIT, PAGE_UNIT } from "util/constant"
-
-interface IPaginationProps {
-  length: number
-  currentPageIndex: number
-  currentPageRange: number
-  pageRange: number
-  onClick: (page: number) => () => void
-  movePrev: () => void
-  moveNext: () => void
-}
+import { IPaginationProps } from "./type"
 
 function PaginationList({
   length,
