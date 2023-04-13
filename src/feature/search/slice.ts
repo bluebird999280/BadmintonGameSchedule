@@ -1,12 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getCompetitionByName, getClubListByCompetition } from "./thunk"
 import { LIST_UNIT } from "util/constant"
-import {
-  IInitialState,
-  IGetCompetitionByNameResponse,
-  IGetClubListByCompetitionResponse,
-  IToggleTeamSelection,
-} from "./type"
+import { IInitialState, IToggleTeamSelection } from "./type"
 
 const initialState: IInitialState = {
   competitionList: [],
@@ -49,41 +44,38 @@ export const searchSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(
-      getCompetitionByName.fulfilled,
-      (state, action: PayloadAction<IGetCompetitionByNameResponse>) => {
-        const temp = []
-        const resultList = action.payload.data_list
+    builder.addCase(getCompetitionByName.fulfilled, (state, action) => {
+      const list = action.payload.data_list
 
-        const { length } = resultList
-        if (length === 0) {
-          state.competitionList = []
-          return
+      let pageIndex = 0
+      state.competitionList = []
+
+      for (let i = 0; i < list.length; i++) {
+        if (i % LIST_UNIT === 0) {
+          pageIndex = Math.floor(i / LIST_UNIT)
+          state.competitionList.push([list[i]])
+        } else {
+          state.competitionList[pageIndex].push(list[i])
         }
-
-        for (let i = 0; i < length / LIST_UNIT; i++)
-          temp.push(resultList.slice(i * LIST_UNIT, (i + 1) * LIST_UNIT))
-
-        state.competitionList = temp
       }
-    ),
-      builder.addCase(
-        getClubListByCompetition.fulfilled,
-        (state, action: PayloadAction<IGetClubListByCompetitionResponse>) => {
-          const { data_list } = action.payload
+    }),
+      builder.addCase(getCompetitionByName.rejected, (state, action) => {
+        if (action.payload === "no data") state.competitionList = []
+      }),
+      builder.addCase(getClubListByCompetition.fulfilled, (state, action) => {
+        const { data_list } = action.payload
 
-          state.clubList = []
-          for (let i = 0; i < data_list.length; i++) {
-            const clubName = data_list[i][0].CLUB_NM1
-            state.clubList.push({
-              name: clubName,
-              count: data_list[i].length,
-              teamList: data_list[i],
-              searched: true,
-            })
-          }
+        state.clubList = []
+        for (let i = 0; i < data_list.length; i++) {
+          const clubName = data_list[i][0].CLUB_NM1
+          state.clubList.push({
+            name: clubName,
+            count: data_list[i].length,
+            teamList: data_list[i],
+            searched: true,
+          })
         }
-      )
+      })
   },
 })
 
