@@ -6,6 +6,7 @@ import { IInitialState, IToggleTeamSelection } from "./type"
 const initialState: IInitialState = {
   competitionList: [],
   clubList: [],
+  clubTable: {},
 }
 
 export const searchSlice = createSlice({
@@ -13,10 +14,9 @@ export const searchSlice = createSlice({
   initialState,
   reducers: {
     toggleClubSelection: (state, action: PayloadAction<string>) => {
-      const index = state.clubList.findIndex(
-        (club) => club.name === action.payload
-      )
-      if (index === -1) return
+      const index = state.clubTable[action.payload]
+
+      if (index === undefined) return
 
       const currentClub = state.clubList[index]
       if (currentClub.selected) {
@@ -68,6 +68,7 @@ export const searchSlice = createSlice({
         state.clubList = []
         for (let i = 0; i < data_list.length; i++) {
           const clubName = data_list[i][0].CLUB_NM1
+          state.clubTable[clubName] = i
           state.clubList.push({
             name: clubName,
             count: data_list[i].length,

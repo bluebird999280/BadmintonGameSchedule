@@ -81,6 +81,9 @@ export interface IClubList {
 export interface IInitialState {
   competitionList: ICompetitionData[][]
   clubList: IClubList[]
+  clubTable: {
+    [clubName: string]: number
+  }
 }
 
 export interface IToggleTeamSelection {
