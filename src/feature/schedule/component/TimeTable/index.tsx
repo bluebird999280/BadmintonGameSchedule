@@ -2,142 +2,41 @@ import {
   Wrapper,
   Container,
   TimeLine,
-  RepresentativeTime,
   GameListByTime,
   GameRowHead,
   GameRow,
 } from "./style"
+import { ITimeTableProps } from "./type"
 
-function TimeTable(): JSX.Element {
+function TimeTable({ list }: ITimeTableProps): JSX.Element {
   return (
     <Wrapper>
       <Container>
         <TimeLine>
-          <RepresentativeTime>
-            <span>09:00</span>
-            <span>+</span>
-          </RepresentativeTime>
           <GameListByTime>
             <GameRowHead className="head">
               <div className="time">시간</div>
               <div className="court">코트 번호(코트 순서)</div>
-              <div className="type">남자/여자/혼복</div>
+              <div className="type">타입</div>
+              <div className="club">클럽</div>
               <div className="name">선수 이름</div>
             </GameRowHead>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-          </GameListByTime>
-        </TimeLine>
-        <TimeLine>
-          <RepresentativeTime>
-            <span>10:00</span>
-            <span>+</span>
-          </RepresentativeTime>
-          <GameListByTime>
-            <GameRowHead className="head">
-              <div className="time">시간</div>
-              <div className="court">코트 번호(코트 순서)</div>
-              <div className="type">남자/여자/혼복</div>
-              <div className="name">선수 이름</div>
-            </GameRowHead>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-          </GameListByTime>
-        </TimeLine>
-        <TimeLine>
-          <RepresentativeTime>
-            <span>11:00</span>
-            <span>+</span>
-          </RepresentativeTime>
-          <GameListByTime>
-            <GameRowHead className="head">
-              <div className="time">시간</div>
-              <div className="court">코트 번호(코트 순서)</div>
-              <div className="type">남자/여자/혼복</div>
-              <div className="name">선수 이름</div>
-            </GameRowHead>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-          </GameListByTime>
-        </TimeLine>
-        <TimeLine>
-          <RepresentativeTime>
-            <span>12:00</span>
-            <span>+</span>
-          </RepresentativeTime>
-          <GameListByTime>
-            <GameRowHead className="head">
-              <div className="time">시간</div>
-              <div className="court">코트 번호(코트 순서)</div>
-              <div className="type">남자/여자/혼복</div>
-              <div className="name">선수 이름</div>
-            </GameRowHead>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
-            <GameRow>
-              <div className="time">09:00</div>
-              <div className="court">코트 1(1번)</div>
-              <div className="type">혼복</div>
-              <div className="name">조수민/이재성 vs 김동규/관향애</div>
-            </GameRow>
+            {list?.map((l) => (
+              <GameRow key={`${l.EVENT_ID}-${l.ENTRY_ID}`}>
+                <div className="time">{l.START_TIME}</div>
+                <div className="court">
+                  코트 {l.COURT_NO}번({l.COURT_SORT}경기)
+                </div>
+                <div className="type">{l.EVENT_NM.split("-")[0]}</div>
+                <div className="club">
+                  {l.T1CLUB} vs {l.T2CLUB}
+                </div>
+                <div className="name">
+                  {l.T1_PLAYER.replace("/", ",")} vs{" "}
+                  {l.T2_PLAYER.replace("/", ",")}
+                </div>
+              </GameRow>
+            ))}
           </GameListByTime>
         </TimeLine>
       </Container>

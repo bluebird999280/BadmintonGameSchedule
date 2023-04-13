@@ -1,20 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { getAllGameList } from "./thunk"
+import { IInitialState } from "./type"
 import { ICompetitionData } from "feature/search/type"
 
-interface ITeam {
-  [club: string]: string[]
-}
-
-interface IIinitalState {
-  competition?: ICompetitionData
-  club?: string[]
-  team?: ITeam
-}
-
-const initialState: IIinitalState = {
+const initialState: IInitialState = {
   competition: undefined,
   club: undefined,
-  team: undefined,
+  gameList: undefined,
 }
 
 export const scheduleSlice = createSlice({
@@ -27,6 +19,11 @@ export const scheduleSlice = createSlice({
     ) => {
       state.competition = payload
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getAllGameList.fulfilled, (state, action) => {
+      state.gameList = action.payload
+    })
   },
 })
 

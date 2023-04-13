@@ -1,7 +1,6 @@
 import { ButtonWrapper } from "./style"
 import PaginationButton from "../PaginationButton"
 import { LIST_UNIT, PAGE_UNIT } from "util/constant"
-import { useMemo } from "react"
 
 interface IPaginationProps {
   length: number

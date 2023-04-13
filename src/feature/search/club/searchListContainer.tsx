@@ -17,8 +17,8 @@ function SearchListContainer({
   }))
 
   const toggleClubSelection = useCallback(
-    (index: number) => () => {
-      dispatch(toggleSelection(currentPage * LIST_UNIT + index))
+    (clubName: string) => () => {
+      dispatch(toggleSelection(clubName))
     },
     [dispatch, currentPage]
   )
@@ -28,12 +28,12 @@ function SearchListContainer({
       {list !== undefined &&
         list
           .slice(currentPage * LIST_UNIT, (currentPage + 1) * LIST_UNIT)
-          .map((club, index) => (
+          .map((club) => (
             <Row
               key={club.name}
               data={club}
               selected={club.selected}
-              onClick={toggleClubSelection(index)}
+              onClick={toggleClubSelection(club.name)}
             />
           ))}
     </>
