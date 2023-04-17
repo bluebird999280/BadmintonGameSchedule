@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react"
 import TimeTable from "./component/TimeTable"
 import DateSelection from "./component/DateSelection"
+import DownloadSchedule from "component/schedule/DownloadSchedule"
 import { Wrapper, Container } from "./style"
 import { getAllGameList } from "./thunk"
 import { useAppSelector, useAppDispatch } from "hook/redux"
@@ -60,11 +61,15 @@ function Schedule(): JSX.Element {
   return (
     <Wrapper>
       <Container>
-        <DateSelection
-          currentSelectedDate={currentSelectedDate}
-          setCurrentSelectedDate={setCurrentSelectedDate}
-          planDateList={gameList.planDateList}
-        />
+        <div className="top">
+          <DateSelection
+            currentSelectedDate={currentSelectedDate}
+            setCurrentSelectedDate={setCurrentSelectedDate}
+            planDateList={gameList.planDateList}
+          />
+          <DownloadSchedule />
+        </div>
+
         <TimeTable list={gameListBySelectedTeamListAndDate}></TimeTable>
       </Container>
     </Wrapper>
