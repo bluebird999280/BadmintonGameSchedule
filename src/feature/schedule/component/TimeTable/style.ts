@@ -21,6 +21,7 @@ export const GameRow = styled.div`
   font-weight: 500;
   text-align: center;
   border-bottom: 4px solid #f8f9fd;
+  background-color: white;
 
   & > div {
     padding: 20px;
@@ -52,7 +53,7 @@ export const GameRow = styled.div`
 
 export const GameRowHead = styled(GameRow)`
   font-weight: bold;
-
+  background-color: black;
   & > div {
     color: white;
     background-color: rgba(0, 0, 0, 0.5) !important;

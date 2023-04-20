@@ -8,7 +8,7 @@ import {
 } from "./style"
 import { ITimeTableProps } from "./type"
 
-function TimeTable({ list }: ITimeTableProps): JSX.Element {
+const TimeTable = ({ list }: ITimeTableProps) => {
   return (
     <Wrapper>
       <Container>
