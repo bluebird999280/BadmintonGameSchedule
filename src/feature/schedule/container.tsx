@@ -1,10 +1,14 @@
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, useRef, useCallback } from "react"
 import TimeTable from "./component/TimeTable"
 import DateSelection from "./component/DateSelection"
+import DownloadSchedule from "component/schedule/DownloadSchedule"
 import { Wrapper, Container } from "./style"
 import { getAllGameList } from "./thunk"
 import { useAppSelector, useAppDispatch } from "hook/redux"
 import { CheckTableType } from "./type"
+import dti from "dom-to-image"
+import { saveAs } from "file-saver"
+import parseDate from "util/func/parseDate"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
@@ -16,8 +20,19 @@ function Schedule(): JSX.Element {
     })
   )
 
+  // useRef
+  const downloadRef = useRef<HTMLDivElement | null>(null)
+
   // useState
   const [currentSelectedDate, setCurrentSelectedDate] = useState("")
+
+  // useCallback
+  const onClickDownloadButton = useCallback(async () => {
+    if (downloadRef.current !== null) {
+      const blob = await dti.toBlob(downloadRef.current)
+      saveAs(blob, parseDate(currentSelectedDate) + ".png")
+    }
+  }, [currentSelectedDate])
 
   // useMemo
   const checkTable = useMemo(() => {
@@ -59,12 +74,16 @@ function Schedule(): JSX.Element {
   if (gameList === undefined) return <></>
   return (
     <Wrapper>
-      <Container>
-        <DateSelection
-          currentSelectedDate={currentSelectedDate}
-          setCurrentSelectedDate={setCurrentSelectedDate}
-          planDateList={gameList.planDateList}
-        />
+      <Container ref={downloadRef}>
+        <div className="top">
+          <DateSelection
+            currentSelectedDate={currentSelectedDate}
+            setCurrentSelectedDate={setCurrentSelectedDate}
+            planDateList={gameList.planDateList}
+          />
+          <DownloadSchedule onClick={onClickDownloadButton} />
+        </div>
+
         <TimeTable list={gameListBySelectedTeamListAndDate}></TimeTable>
       </Container>
     </Wrapper>

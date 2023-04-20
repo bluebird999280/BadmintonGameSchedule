@@ -21,38 +21,61 @@ export const GameRow = styled.div`
   font-weight: 500;
   text-align: center;
   border-bottom: 4px solid #f8f9fd;
-
+  background-color: white;
   & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
+    flex: 1 0 auto;
+  }
+  .time {
+    width: 10%;
+    background-color: rgb(248, 248, 248);
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 
-  .time {
-    min-width: 100px;
-    background-color: rgb(248, 248, 248);
+  .time-court {
+    width: 10%;
+    display: none;
+    @media screen and (max-width: 500px) {
+      display: flex;
+    }
   }
 
   .court {
-    min-width: 200px;
+    width: 20%;
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 
   .type {
-    min-width: 100px;
+    width: 10%;
     background-color: rgb(248, 248, 248);
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 
   .club {
-    min-width: 300px;
+    width: 30%;
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 
   .name {
-    min-width: 300px;
+    width: 30%;
     background-color: rgb(248, 248, 248);
   }
 `
 
 export const GameRowHead = styled(GameRow)`
   font-weight: bold;
-
+  background-color: black;
   & > div {
     color: white;
     background-color: rgba(0, 0, 0, 0.5) !important;
