@@ -22,31 +22,32 @@ export const GameRow = styled.div`
   text-align: center;
   border-bottom: 4px solid #f8f9fd;
   background-color: white;
-
   & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
   }
-
   .time {
-    min-width: 100px;
+    min-width: 10%;
     background-color: rgb(248, 248, 248);
   }
 
   .court {
-    min-width: 200px;
+    min-width: 20%;
   }
 
   .type {
-    min-width: 100px;
+    min-width: 10%;
     background-color: rgb(248, 248, 248);
   }
 
   .club {
-    min-width: 300px;
+    min-width: 30%;
   }
 
   .name {
-    min-width: 300px;
+    min-width: 30%;
     background-color: rgb(248, 248, 248);
   }
 `
