@@ -27,27 +27,48 @@ export const GameRow = styled.div`
     justify-content: center;
     align-items: center;
     padding: 20px;
+    flex: 1 0 auto;
   }
   .time {
-    min-width: 10%;
+    width: 10%;
     background-color: rgb(248, 248, 248);
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+  }
+
+  .time-court {
+    width: 10%;
+    display: none;
+    @media screen and (max-width: 500px) {
+      display: flex;
+    }
   }
 
   .court {
-    min-width: 20%;
+    width: 20%;
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 
   .type {
-    min-width: 10%;
+    width: 10%;
     background-color: rgb(248, 248, 248);
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 
   .club {
-    min-width: 30%;
+    width: 30%;
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 
   .name {
-    min-width: 30%;
+    width: 30%;
     background-color: rgb(248, 248, 248);
   }
 `
