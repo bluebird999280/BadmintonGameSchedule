@@ -28,8 +28,8 @@ export const Introduction = styled.div`
 
   .text {
     p {
-      font-size: 18px;
-      font-weight: 500;
+      font-size: 14px;
+      font-weight: 400;
       margin-bottom: 10px;
     }
   }
