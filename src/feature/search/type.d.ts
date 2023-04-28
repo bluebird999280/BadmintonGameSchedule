@@ -1,4 +1,12 @@
 // ResponseData
+
+export interface ICompetitionDataReturnType {
+  data_list: ICompetitionData[]
+  gymList: string[]
+  fileList: string[]
+  ResultCode: number
+}
+
 export interface ICompetitionData {
   ACCEPT_DATE: string
   ACCEPT_DATE_FROM: string
@@ -71,6 +79,7 @@ export interface ITeamData {
 
 // Slice
 export interface IInitialState {
+  pageStart: number
   competitionList: ICompetitionData[][]
   clubList: IClubList[]
   clubTable: {

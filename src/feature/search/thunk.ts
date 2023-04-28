@@ -1,8 +1,14 @@
 import axiosInstance from "util/axios"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { IGetCompetitionByName, IGetClubListByCompetition } from "./type"
+import { RootState } from "util/redux/store"
+import { ICompetitionDataReturnType } from "./type"
 
-export const getCompetitionByName = createAsyncThunk(
+export const getCompetitionByName = createAsyncThunk<
+  ICompetitionDataReturnType,
+  { query: string; pageStart: number; pageLimit: number },
+  { state: RootState }
+>(
   "search/getCompetitionByName",
   async ({ query, pageStart, pageLimit }: IGetCompetitionByName, thunkAPI) => {
     const response = await axiosInstance({
@@ -18,6 +24,10 @@ export const getCompetitionByName = createAsyncThunk(
     })
 
     if (response.data.data_list.length === 0) {
+      const state = thunkAPI.getState()
+      const { pageStart } = state.search
+
+      if (pageStart > 0) return thunkAPI.rejectWithValue("no more data")
       return thunkAPI.rejectWithValue("no data")
     }
 

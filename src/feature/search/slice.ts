@@ -4,6 +4,7 @@ import { LIST_UNIT } from "util/constant"
 import { IInitialState, IToggleTeamSelection } from "./type"
 
 const initialState: IInitialState = {
+  pageStart: 0,
   competitionList: [],
   clubList: [],
   clubTable: {},
@@ -13,6 +14,9 @@ export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
+    changePageStart: (state, action: PayloadAction<number>) => {
+      state.pageStart = action.payload
+    },
     toggleClubSelection: (state, action: PayloadAction<string>) => {
       const index = state.clubTable[action.payload]
 
@@ -48,19 +52,24 @@ export const searchSlice = createSlice({
       const list = action.payload.data_list
 
       let pageIndex = 0
-      state.competitionList = []
+      if (state.pageStart === 0) {
+        state.competitionList = []
+      }
 
       for (let i = 0; i < list.length; i++) {
         if (i % LIST_UNIT === 0) {
-          pageIndex = Math.floor(i / LIST_UNIT)
-          state.competitionList.push([list[i]])
-        } else {
-          state.competitionList[pageIndex].push(list[i])
+          state.competitionList.push([])
         }
+        pageIndex = Math.floor(i / LIST_UNIT)
+        state.competitionList[state.pageStart / LIST_UNIT + pageIndex].push(
+          list[i]
+        )
       }
     }),
       builder.addCase(getCompetitionByName.rejected, (state, action) => {
-        if (action.payload === "no data") state.competitionList = []
+        if (action.payload === "no data") {
+          state.competitionList = []
+        }
       }),
       builder.addCase(getClubListByCompetition.fulfilled, (state, action) => {
         const { data_list } = action.payload
@@ -81,6 +90,7 @@ export const searchSlice = createSlice({
 })
 
 export const {
+  changePageStart,
   toggleClubSelection,
   toggleTeamSelection,
   divideClubListByQuery,
