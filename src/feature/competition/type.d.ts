@@ -47,6 +47,7 @@ export interface ICompetition {
 export interface IInitialState {
   query: string
   pageStart: number
+  currentPage: number
   competition?: ICompetition
   competitionArray: ICompetition[][]
 }

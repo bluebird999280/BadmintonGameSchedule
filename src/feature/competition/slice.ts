@@ -1,3 +1,4 @@
+import { ICompetition } from "./type.d"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { fetchCompetitions } from "./thunk"
 import { IInitialState } from "./type"
@@ -6,6 +7,7 @@ import { LIST_UNIT } from "util/constant"
 const initialState: IInitialState = {
   query: "",
   pageStart: 0,
+  currentPage: 0,
   competition: undefined,
   competitionArray: [],
 }
@@ -19,6 +21,12 @@ const competitionSlice = createSlice({
     },
     changePageStart: (state, action: PayloadAction<number>) => {
       state.pageStart = action.payload
+    },
+    changeCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload
+    },
+    changeCompetition: (state, action: PayloadAction<ICompetition>) => {
+      state.competition = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -51,5 +59,10 @@ const competitionSlice = createSlice({
   },
 })
 
-export const { changeQuery, changePageStart } = competitionSlice.actions
+export const {
+  changeQuery,
+  changePageStart,
+  changeCurrentPage,
+  changeCompetition,
+} = competitionSlice.actions
 export default competitionSlice.reducer
