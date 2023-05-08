@@ -1,8 +1,8 @@
 import { ICompetition } from "./type.d"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { LIST_UNIT, PAGE_UNIT } from "util/constant"
 import { fetchCompetitions } from "./thunk"
 import { IInitialState } from "./type"
-import { LIST_UNIT } from "util/constant"
 
 const initialState: IInitialState = {
   query: "",
@@ -25,7 +25,10 @@ const competitionSlice = createSlice({
     changeCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload
     },
-    changeCompetition: (state, action: PayloadAction<ICompetition>) => {
+    changeCompetition: (
+      state,
+      action: PayloadAction<ICompetition | undefined>
+    ) => {
       state.competition = action.payload
     },
   },
@@ -46,10 +49,14 @@ const competitionSlice = createSlice({
             i + LIST_UNIT
           )
         }
+
+        state.pageStart = state.competitionArray.length * LIST_UNIT
       })
       .addCase(fetchCompetitions.rejected, (state, action) => {
         switch (action.payload) {
           case "no more data":
+            state.pageStart += 1
+            state.currentPage -= PAGE_UNIT
             break
           case "no data":
             state = { ...initialState, query: state.query }

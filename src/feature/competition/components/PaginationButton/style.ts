@@ -1,6 +1,7 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import { IWrapperProps } from "./type"
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<IWrapperProps>`
   width: 30px;
   height: 32px;
   display: inline-flex;
@@ -16,4 +17,10 @@ export const Wrapper = styled.div`
   &:nth-of-type(2n) {
     background-color: #f8f8f8;
   }
+
+  ${(props) =>
+    props.isHidden &&
+    css`
+      visibility: hidden;
+    `};
 `
