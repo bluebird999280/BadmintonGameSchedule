@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 import { PAGE_UNIT, LIST_UNIT } from "util/constant"
 import { useAppDispatch } from "hook/redux"
 import SearchForm from "component/search/SearchForm"
@@ -10,6 +10,17 @@ function SearchFormContainer(): JSX.Element {
 
   // useState
   const [query, setQuery] = useState("")
+
+  // useEffect
+  useEffect(() => {
+    dispatch(
+      getCompetitionByName({
+        query,
+        pageStart: 0,
+        pageLimit: PAGE_UNIT * LIST_UNIT * 2,
+      })
+    )
+  }, [])
 
   // useCallback
   const searchFormOnSubmit = useCallback(

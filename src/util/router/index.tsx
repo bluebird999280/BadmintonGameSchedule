@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Layout from "page/layout"
 import HomePage from "page/home"
-import SearchCompetitionPage from "page/search/competition"
+import CompetitionPage from "page/competition"
 import SearchClubPage from "page/search/club"
 import SearchTeamPage from "page/search/team"
 import SchedulePage from "page/schedule"
@@ -16,15 +16,15 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/search/competition",
-        element: <SearchCompetitionPage />,
+        path: "/competition",
+        element: <CompetitionPage />,
       },
       {
-        path: "/search/club",
+        path: "/club",
         element: <SearchClubPage />,
       },
       {
-        path: "/search/team",
+        path: "/team",
         element: <SearchTeamPage />,
       },
       {

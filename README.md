@@ -1,46 +1,20 @@
-# Getting Started with Create React App
+# Badminton Game Schedule
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+배드민턴 경기 대회에서 원하는 팀의 경기 시간만을 추려서 보여줍니다.
 
-## Available Scripts
+## 메뉴
 
-In the project directory, you can run:
+홈 - 기본 설명, 개발 주기, 개발자 <br/>
+대회 검색 - 스포넷에 있는 대회를 검색하고 이를 보여줍니다.<br/>
+클럽 검색 - 선택된 대회에 있는 클럽 전부를 보여주거나, 검색된 이름에 해당하는 클럽을 나열합니다.<br/>
+팀 검색 - 클럽 내에서 출전하는 팀들의 리스트를 보여주며, 시간표에 반영할 수 있습니다. (팀 이름으로 검색할 수 있습니다.)<br/>
+시간표 - 선택된 팀들을 통해 최종 시간표를 보여줍니다. (날짜별로 보여줍니다.)<br/>
 
-### `npm start`
+## 해결해야 할 부분
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. 시간표에서 선택된 팀들이 해당 날짜에 한 경기라도 없을 경우, 날짜를 보여주면 안됩니다.
+2. 시간표에서 경기장이 여러개인 경우, 경기장의 위치도 표시합니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 예제 사진
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="https://github.com/Psycoma99/BadmintonGameSchedule/blob/1.0.2/example.png" />

@@ -26,7 +26,13 @@ function ListContainer({ query }: IProps): JSX.Element {
       <Collapse>
         {list.map(
           (club, clubIndex) =>
-            club.selected && (
+            club.selected &&
+            (query === "" ||
+              club.teamList.findIndex(
+                (team) =>
+                  team.PLAYER_NM1.search(query) !== -1 ||
+                  team.PLAYER_NM2.search(query) !== -1
+              )) !== -1 && (
               <Panel header={club.name} key={club.name}>
                 <List
                   itemLayout="horizontal"

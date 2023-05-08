@@ -55,6 +55,23 @@ function HomePage(): JSX.Element {
                     label: "2023년 3월 27일",
                     children: "대회 목록 보여주기 및 검색 기능 추가",
                   },
+
+                  {
+                    label: "2023년 4월 5일",
+                    children: "해당 대회의 클럽 목록 보여주기",
+                  },
+                  {
+                    label: "2023년 4월 7일",
+                    children: "클럽 검색 기능 제공하기",
+                  },
+                  {
+                    label: "2023년 4월 10일",
+                    children: "클럽별 팀 목록 및 검색 기능 제공하기",
+                  },
+                  {
+                    label: "2023년 4월 20일",
+                    children: "클럽 시간표 제공하기",
+                  },
                 ]}
               />
             </DevelopCycle>
@@ -62,8 +79,10 @@ function HomePage(): JSX.Element {
           <Panel header="소개" key="3">
             <Introduction>
               <div className="text">
-                <p>개발자 : 장동건</p>
-                <p>개발 기간 : 2023년 3월 23일 ~ </p>
+                <p>
+                  개발자 : <strong>장동건</strong>
+                </p>
+                <p>1.0.0 개발 기간 : 2023/3/23 ~ 2023/4/20</p>
               </div>
 
               <div className="icons">
