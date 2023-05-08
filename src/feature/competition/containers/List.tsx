@@ -2,6 +2,7 @@ import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import List from "../components/List"
 import { changeCompetition } from "../slice"
+import { fetchClubs } from "feature/club/thunk"
 import { ICompetition } from "../type"
 
 export default function ListContainer(): JSX.Element {
@@ -17,8 +18,9 @@ export default function ListContainer(): JSX.Element {
   const onClick = useCallback(
     (competition: ICompetition) => () => {
       dispatch(changeCompetition(competition))
+      dispatch(fetchClubs())
     },
-    []
+    [dispatch]
   )
 
   return (
