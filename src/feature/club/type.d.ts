@@ -1,17 +1,19 @@
 export interface IInitialState {
   query: string
   currentPage: number
-  clubArray: ITeamData[][]
   clubTable: IClubTable | null
 }
 
+export interface IClubData {
+  index: number
+  team: ITeamData[]
+  teamCount: number
+  selected: boolean
+  searched: boolean
+}
+
 export interface IClubTable {
-  [clubName: string]: {
-    index: number
-    teamCount: number
-    selected: boolean
-    searched: boolean
-  }
+  [clubName: string]: IClubData
 }
 
 export interface ITeamData {
@@ -37,5 +39,4 @@ export interface ITeamData {
   POINT_YN: string
   ADVANTAGE: string
   MATCH_OPEN_YN: string
-  selected?: boolean
 }
