@@ -24,7 +24,7 @@ export const fetchClubs = createAsyncThunk<
     },
   })
 
-  if (response.data.data_total === 0) thunkAPI.rejectWithValue("no data")
+  if (response.data.data_total === 0) return thunkAPI.rejectWithValue("no data")
 
   return response.data.data_list
 })
