@@ -62,6 +62,11 @@ const clubSlice = createSlice({
               team: club,
             },
           }
+
+          const idx = Math.floor(index / LIST_UNIT)
+          if (index % LIST_UNIT)
+            state.searchedClubNameArray[idx].push(club[0].CLUB_NM1)
+          else state.searchedClubNameArray[idx] = [club[0].CLUB_NM1]
         })
       })
       .addCase(fetchClubs.rejected, (state, action) => {
@@ -69,6 +74,7 @@ const clubSlice = createSlice({
           case "no data":
             state.currentPage = 0
             state.clubTable = null
+            state.searchedClubNameArray = []
         }
       })
   },

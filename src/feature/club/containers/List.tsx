@@ -5,13 +5,13 @@ import List from "../components/List"
 
 export default function ListContainer(): React.ReactElement {
   const dispatch = useAppDispatch()
-  const { currentPage, clubTable, searchedClubNameArray } = useAppSelector(
-    (state) => ({
+  const { currentPage, competition, clubTable, searchedClubNameArray } =
+    useAppSelector((state) => ({
       currentPage: state.club.currentPage,
+      competition: state.competition.competition,
       clubTable: state.club.clubTable,
       searchedClubNameArray: state.club.searchedClubNameArray,
-    })
-  )
+    }))
 
   const onClick = useCallback(
     (clubName: string) => () => {
