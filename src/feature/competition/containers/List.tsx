@@ -2,8 +2,8 @@ import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import List from "../components/List"
 import { changeCompetition } from "../slice"
-import { fetchClubs } from "feature/club/thunk"
 import { ICompetition } from "../type"
+import { fetchClubs } from "feature/club/thunk"
 
 export default function ListContainer(): JSX.Element {
   const dispatch = useAppDispatch()
