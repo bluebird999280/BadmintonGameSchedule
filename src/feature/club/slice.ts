@@ -1,11 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { fetchClubs } from "./thunk"
 import { IInitialState } from "./type"
+import { LIST_UNIT } from "util/constant"
 
 const initialState: IInitialState = {
   query: "",
   currentPage: 0,
   clubTable: null,
+  searchedClubNameArray: [],
 }
 
 const clubSlice = createSlice({
@@ -15,6 +17,9 @@ const clubSlice = createSlice({
     changeQuery: (state, action: PayloadAction<string>) => {
       state.query = action.payload
     },
+    changeCurrentPage: (state, action: PayloadAction<number>) => {
+      state.currentPage = action.payload
+    },
     selectClub: (state, action: PayloadAction<string>) => {
       if (state.clubTable !== null) {
         state.clubTable[action.payload].selected =
@@ -22,13 +27,24 @@ const clubSlice = createSlice({
       }
     },
     searchClub: (state) => {
-      Object.getOwnPropertyNames(state.clubTable).forEach((clubName) => {
-        if (state.clubTable !== null) {
-          if (clubName.search(state.query) !== -1)
-            state.clubTable[clubName].searched = true
-          else state.clubTable[clubName].searched = false
-        }
-      })
+      state.currentPage = 0
+
+      if (state.clubTable === null) {
+        state.searchedClubNameArray = []
+      }
+      if (state.clubTable !== null) {
+        let index = 0
+        state.searchedClubNameArray = [[]]
+        Object.getOwnPropertyNames(state.clubTable).forEach((clubName) => {
+          if (clubName.search(state.query) !== -1) {
+            if (state.searchedClubNameArray[index].length < LIST_UNIT) {
+              state.searchedClubNameArray[index].push(clubName)
+            } else {
+              state.searchedClubNameArray[++index] = [clubName]
+            }
+          }
+        })
+      }
     },
   },
   extraReducers: (builder) => {
@@ -43,7 +59,6 @@ const clubSlice = createSlice({
               index: index,
               teamCount: club.length,
               selected: false,
-              searched: true,
               team: club,
             },
           }
@@ -59,5 +74,6 @@ const clubSlice = createSlice({
   },
 })
 
-export const { changeQuery, selectClub, searchClub } = clubSlice.actions
+export const { changeQuery, changeCurrentPage, selectClub, searchClub } =
+  clubSlice.actions
 export default clubSlice.reducer

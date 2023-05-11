@@ -2,6 +2,7 @@ export interface IInitialState {
   query: string
   currentPage: number
   clubTable: IClubTable | null
+  searchedClubNameArray: string[][]
 }
 
 export interface IClubData {
@@ -9,7 +10,6 @@ export interface IClubData {
   team: ITeamData[]
   teamCount: number
   selected: boolean
-  searched: boolean
 }
 
 export interface IClubTable {
