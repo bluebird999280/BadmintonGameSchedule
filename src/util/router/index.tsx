@@ -3,7 +3,7 @@ import Layout from "page/layout"
 import HomePage from "page/home"
 import CompetitionPage from "page/competition"
 import ClubPage from "page/club"
-import SearchTeamPage from "page/search/team"
+import TeamPage from "page/team"
 import SchedulePage from "page/schedule"
 
 const router = createBrowserRouter([
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/team",
-        element: <SearchTeamPage />,
+        element: <TeamPage />,
       },
       {
         path: "/schedule",
