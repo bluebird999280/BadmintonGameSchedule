@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { fetchClubs } from "./thunk"
-import { IInitialState } from "./type"
+import { IInitialState, ISelectTeamPayload } from "./type"
 import { LIST_UNIT } from "util/constant"
 
 const initialState: IInitialState = {
@@ -46,6 +46,13 @@ const clubSlice = createSlice({
         })
       }
     },
+    selectTeam: (state, action: PayloadAction<ISelectTeamPayload>) => {
+      if (state.clubTable !== null) {
+        const { clubName, teamIndex } = action.payload
+        state.clubTable[clubName].team[teamIndex].selected =
+          !state.clubTable[clubName].team[teamIndex].selected
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -80,6 +87,11 @@ const clubSlice = createSlice({
   },
 })
 
-export const { changeQuery, changeCurrentPage, selectClub, searchClub } =
-  clubSlice.actions
+export const {
+  changeQuery,
+  changeCurrentPage,
+  selectClub,
+  searchClub,
+  selectTeam,
+} = clubSlice.actions
 export default clubSlice.reducer
