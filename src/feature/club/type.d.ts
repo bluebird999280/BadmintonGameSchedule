@@ -16,6 +16,11 @@ export interface IClubTable {
   [clubName: string]: IClubData
 }
 
+export interface ISelectTeamPayload {
+  clubName: string
+  teamIndex: number
+}
+
 export interface ITeamData {
   EVENT_ID: string
   EVENT_NM: string
