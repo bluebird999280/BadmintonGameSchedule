@@ -39,4 +39,6 @@ export interface ITeamData {
   POINT_YN: string
   ADVANTAGE: string
   MATCH_OPEN_YN: string
+  selected?: boolean
+  searched?: boolean
 }
