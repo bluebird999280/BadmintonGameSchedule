@@ -1,7 +1,8 @@
 export interface IInitialState {
   competition?: any
   club?: string[]
-  gameList?: IGameListProps
+  gameList?: IDataListProps[]
+  planDateList?: { PLAN_DATE: string }[]
 }
 
 export interface IDataListProps {

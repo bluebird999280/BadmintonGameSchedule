@@ -18,15 +18,15 @@ function LayoutPage(): JSX.Element {
     },
     {
       title: "대회 검색",
-      href: "/search/competition",
+      href: "/competition",
     },
     {
       title: "클럽 검색",
-      href: "/search/club",
+      href: "/club",
     },
     {
       title: "팀 검색",
-      href: "/search/team",
+      href: "/team",
     },
     {
       title: "시간표",
@@ -39,13 +39,13 @@ function LayoutPage(): JSX.Element {
       case "/":
         setTitle("홈")
         break
-      case "/search/competition":
+      case "/competition":
         setTitle("대회 검색")
         break
-      case "/search/club":
+      case "/club":
         setTitle("클럽 검색")
         break
-      case "/search/team":
+      case "/team":
         setTitle("팀 검색")
         break
       case "/schedule":

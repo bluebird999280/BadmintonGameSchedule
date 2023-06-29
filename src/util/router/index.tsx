@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Layout from "page/layout"
 import HomePage from "page/home"
-import SearchCompetitionPage from "page/search/competition"
-import SearchClubPage from "page/search/club"
-import SearchTeamPage from "page/search/team"
+import CompetitionPage from "page/competition"
+import ClubPage from "page/club"
+import TeamPage from "page/team"
 import SchedulePage from "page/schedule"
 
 const router = createBrowserRouter([
@@ -16,16 +16,16 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/search/competition",
-        element: <SearchCompetitionPage />,
+        path: "/competition",
+        element: <CompetitionPage />,
       },
       {
-        path: "/search/club",
-        element: <SearchClubPage />,
+        path: "/club",
+        element: <ClubPage />,
       },
       {
-        path: "/search/team",
-        element: <SearchTeamPage />,
+        path: "/team",
+        element: <TeamPage />,
       },
       {
         path: "/schedule",
