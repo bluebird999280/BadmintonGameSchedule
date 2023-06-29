@@ -6,6 +6,7 @@ const initialState: IInitialState = {
   competition: undefined,
   club: undefined,
   gameList: undefined,
+  planDateList: undefined,
 }
 
 export const scheduleSlice = createSlice({
@@ -18,7 +19,12 @@ export const scheduleSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getAllGameList.fulfilled, (state, action) => {
-      state.gameList = action.payload
+      state.planDateList = action.payload.planDateList
+      state.gameList = action.payload.data_list.reduce((acc: any, cur: any) => {
+        if (acc[cur.EVENT_ID] === undefined)
+          acc[cur.EVENT_ID] = { [cur.ENTRY_ID]: true }
+        else acc[cur.EVENT_ID][cur.ENTRY_ID] = true
+      }, {})
     })
   },
 })

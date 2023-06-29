@@ -12,8 +12,9 @@ import parseDate from "util/func/parseDate"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { tournamentId, gameList } = useAppSelector((state) => ({
+  const { tournamentId, clubTable, gameList } = useAppSelector((state) => ({
     tournamentId: state.competition.competition?.TOURNAMENT_ID,
+    clubTable: state.club.clubTable,
     gameList: state.schedule.gameList,
   }))
 
@@ -31,6 +32,12 @@ function Schedule(): JSX.Element {
     }
   }, [currentSelectedDate])
 
+  const gameListBySelectedTeamListAndDate = useMemo(
+    () => [],
+
+    []
+  )
+
   useEffect(() => {
     if (tournamentId !== undefined)
       dispatch(
@@ -42,7 +49,22 @@ function Schedule(): JSX.Element {
   }, [dispatch, tournamentId])
 
   if (gameList === undefined) return <></>
-  return <Wrapper></Wrapper>
+  return (
+    <Wrapper>
+      <Container ref={downloadRef}>
+        <div className="top">
+          <DateSelection
+            currentSelectedDate={currentSelectedDate}
+            setCurrentSelectedDate={setCurrentSelectedDate}
+            planDateList={gameList.planDateList}
+          />
+          <DownloadSchedule onClick={onClickDownloadButton} />
+        </div>
+
+        <TimeTable list={gameListBySelectedTeamListAndDate}></TimeTable>
+      </Container>
+    </Wrapper>
+  )
 }
 
 export default Schedule
