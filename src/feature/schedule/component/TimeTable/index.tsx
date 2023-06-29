@@ -9,6 +9,7 @@ import {
 import { ITimeTableProps } from "./type"
 
 const TimeTable = ({ list }: ITimeTableProps) => {
+  console.log(list)
   return (
     <Wrapper>
       <Container>

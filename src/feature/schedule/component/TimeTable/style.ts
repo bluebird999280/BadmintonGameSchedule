@@ -2,17 +2,22 @@ import styled from "styled-components"
 
 export const Wrapper = styled.div`
   display: inline-block;
-  max-width: 1000px;
+  flex: 1 0 auto;
 `
-export const Container = styled.div``
+export const Container = styled.div`
+  flex: 1 0 auto;
+`
 
-export const TimeLine = styled.div``
+export const TimeLine = styled.div`
+  flex: 1 0 auto;
+`
 
 export const GameListByTime = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 5px 0 rgb(0 0 0 / 15%);
   overflow: hidden;
   display: inline-block;
+  flex: 1 0 auto;
 `
 export const GameRow = styled.div`
   display: flex;
