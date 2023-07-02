@@ -73,7 +73,7 @@ function Schedule(): JSX.Element {
           />
           <DownloadSchedule onClick={onClickDownloadButton} />
         </div>
-        <TimeTable list={gameListBySelectedTeamListAndDate} />
+        <TimeTable list={gameListBySelectedTeamListAndDate} ref={downloadRef} />
       </Container>
     </Wrapper>
   )

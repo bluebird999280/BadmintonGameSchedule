@@ -7,11 +7,15 @@ import {
   GameRow,
 } from "./style"
 import { ITimeTableProps } from "./type"
+import { forwardRef, ForwardedRef } from "react"
 
-const TimeTable = ({ list }: ITimeTableProps) => {
+const TimeTable = forwardRef(function TimeTable(
+  { list }: ITimeTableProps,
+  forwardedRef: ForwardedRef<HTMLDivElement>
+) {
   console.log(list)
   return (
-    <Wrapper>
+    <Wrapper ref={forwardedRef}>
       <Container>
         <TimeLine>
           <GameListByTime>
@@ -52,6 +56,6 @@ const TimeTable = ({ list }: ITimeTableProps) => {
       </Container>
     </Wrapper>
   )
-}
+})
 
 export default TimeTable
