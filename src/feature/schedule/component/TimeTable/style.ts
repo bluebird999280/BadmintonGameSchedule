@@ -40,7 +40,7 @@ export const GameRow = styled.div`
   }
   .time {
     max-width: 80px;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     background-color: rgb(248, 248, 248);
     @media screen and (max-width: 500px) {
       display: none;
@@ -49,7 +49,7 @@ export const GameRow = styled.div`
 
   .time-court {
     max-width: 160px;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     display: none;
     @media screen and (max-width: 500px) {
       width: 30%;
@@ -59,16 +59,14 @@ export const GameRow = styled.div`
   }
 
   .court {
-    max-width: 200px;
-    flex: 0 1 auto;
+    flex: 0 1 250px;
     @media screen and (max-width: 500px) {
       display: none;
     }
   }
 
   .type {
-    max-width: 80px;
-    flex: 0 1 auto;
+    flex: 0 1 100px;
     background-color: rgb(248, 248, 248);
     @media screen and (max-width: 500px) {
       display: none;
@@ -76,8 +74,7 @@ export const GameRow = styled.div`
   }
 
   .club {
-    max-width: 200px;
-    flex: 0 1 auto;
+    flex: 0 1 200px;
     @media screen and (max-width: 500px) {
       display: none;
     }
@@ -85,7 +82,7 @@ export const GameRow = styled.div`
 
   .name {
     max-width: 320px;
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     white-space: nowrap;
     background-color: rgb(248, 248, 248);
     @media screen and (max-width: 500px) {
