@@ -17,7 +17,9 @@ const TimeTable = ({ list }: ITimeTableProps) => {
           <GameListByTime>
             <GameRowHead className="head">
               <div className="time">시간</div>
-              <div className="time-court">시간 (코트번호-경기번호)</div>
+              <div className="time-court">
+                시간 <br /> (코트-경기)
+              </div>
               <div className="court">코트 번호(코트 순서)</div>
               <div className="type">타입</div>
               <div className="club">클럽</div>
