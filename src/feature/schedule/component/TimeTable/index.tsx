@@ -42,11 +42,12 @@ const TimeTable = forwardRef(function TimeTable(
                   </div>
                   <div className="type">{l.EVENT_NM.split("-")[0]}</div>
                   <div className="club">
-                    {l.T1CLUB} vs {l.T2CLUB}
+                    <div>{l.T1CLUB}</div>
+                    <div>{l.T2CLUB}</div>
                   </div>
                   <div className="name">
-                    {l.T1_PLAYER.replace("/", ",")} vs{" "}
-                    {l.T2_PLAYER.replace("/", ",")}
+                    <div>{l.T1_PLAYER.replace("/", ",")}</div>
+                    <div>{l.T2_PLAYER.replace("/", ",")}</div>
                   </div>
                 </GameRow>
               </>
