@@ -59,14 +59,14 @@ export const GameRow = styled.div`
   }
 
   .court {
-    flex: 0 1 250px;
+    width: 200px;
     @media screen and (max-width: 500px) {
       display: none;
     }
   }
 
   .type {
-    flex: 0 1 100px;
+    width: 100px;
     background-color: rgb(248, 248, 248);
     @media screen and (max-width: 500px) {
       display: none;
@@ -74,16 +74,23 @@ export const GameRow = styled.div`
   }
 
   .club {
-    flex: 0 1 200px;
+    width: 200px;
+    flex-direction: column;
+    & > div {
+      width: 100%;
+      white-space: wrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     @media screen and (max-width: 500px) {
       display: none;
     }
   }
 
   .name {
-    max-width: 320px;
+    min-width: 180px;
+    flex-direction: column;
     flex: 1 1 auto;
-    white-space: nowrap;
     background-color: rgb(248, 248, 248);
     @media screen and (max-width: 500px) {
       width: 80%;
