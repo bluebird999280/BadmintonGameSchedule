@@ -1,21 +1,31 @@
 import styled from "styled-components"
 
 export const Wrapper = styled.div`
-  display: inline-block;
-  max-width: 1000px;
+  display: flex;
+  flex: 1 0 auto;
 `
-export const Container = styled.div``
+export const Container = styled.div`
+  display: flex;
+  flex: 1 0 auto;
+`
 
-export const TimeLine = styled.div``
+export const TimeLine = styled.div`
+  display: flex;
+  flex: 1 0 auto;
+`
 
 export const GameListByTime = styled.div`
   border-radius: 10px;
   box-shadow: 0 0 5px 0 rgb(0 0 0 / 15%);
   overflow: hidden;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 `
 export const GameRow = styled.div`
   display: flex;
+  box-sizing: border-box;
+  flex-basis: 0;
   color: #212529;
   font-size: 17px;
   font-weight: 500;
@@ -27,10 +37,10 @@ export const GameRow = styled.div`
     justify-content: center;
     align-items: center;
     padding: 20px;
-    flex: 1 0 auto;
   }
   .time {
-    width: 10%;
+    max-width: 80px;
+    flex: 1 1 auto;
     background-color: rgb(248, 248, 248);
     @media screen and (max-width: 500px) {
       display: none;
@@ -38,22 +48,25 @@ export const GameRow = styled.div`
   }
 
   .time-court {
-    width: 10%;
+    max-width: 160px;
+    flex: 1 1 auto;
     display: none;
     @media screen and (max-width: 500px) {
+      width: 30%;
+      white-space: nowrap;
       display: flex;
     }
   }
 
   .court {
-    width: 20%;
+    width: 200px;
     @media screen and (max-width: 500px) {
       display: none;
     }
   }
 
   .type {
-    width: 10%;
+    width: 100px;
     background-color: rgb(248, 248, 248);
     @media screen and (max-width: 500px) {
       display: none;
@@ -61,15 +74,27 @@ export const GameRow = styled.div`
   }
 
   .club {
-    width: 30%;
+    width: 200px;
+    flex-direction: column;
+    & > div {
+      width: 100%;
+      white-space: wrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     @media screen and (max-width: 500px) {
       display: none;
     }
   }
 
   .name {
-    width: 30%;
+    min-width: 180px;
+    flex-direction: column;
+    flex: 1 1 auto;
     background-color: rgb(248, 248, 248);
+    @media screen and (max-width: 500px) {
+      width: 80%;
+    }
   }
 `
 

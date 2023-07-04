@@ -2,6 +2,7 @@ export interface IInitialState {
   query: string
   currentPage: number
   clubTable: IClubTable | null
+  hashTableForSelectedTeam: IHashTableForSelectedTeam
   searchedClubNameArray: string[][]
 }
 
@@ -14,6 +15,12 @@ export interface IClubData {
 
 export interface IClubTable {
   [clubName: string]: IClubData
+}
+
+export interface IHashTableForSelectedTeam {
+  [eventId: string]: {
+    [entryId: string]: boolean
+  }
 }
 
 export interface ISelectTeamPayload {

@@ -7,6 +7,7 @@ const initialState: IInitialState = {
   query: "",
   currentPage: 0,
   clubTable: null,
+  hashTableForSelectedTeam: {},
   searchedClubNameArray: [],
 }
 
@@ -51,6 +52,22 @@ const clubSlice = createSlice({
         const { clubName, teamIndex } = action.payload
         state.clubTable[clubName].team[teamIndex].selected =
           !state.clubTable[clubName].team[teamIndex].selected
+
+        const { EVENT_ID, ENTRY_ID } = state.clubTable[clubName].team[teamIndex]
+        if (state.hashTableForSelectedTeam[EVENT_ID] === undefined) {
+          state.hashTableForSelectedTeam[EVENT_ID] = {
+            [ENTRY_ID]: true,
+          }
+        } else {
+          if (
+            state.hashTableForSelectedTeam[EVENT_ID][ENTRY_ID] === undefined
+          ) {
+            state.hashTableForSelectedTeam[EVENT_ID][ENTRY_ID] = true
+          } else {
+            state.hashTableForSelectedTeam[EVENT_ID][ENTRY_ID] =
+              !state.hashTableForSelectedTeam[EVENT_ID][ENTRY_ID]
+          }
+        }
       }
     },
   },
