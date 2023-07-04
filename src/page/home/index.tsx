@@ -27,8 +27,8 @@ function HomePage(): JSX.Element {
               </p>
               <p>
                 <sup>3</sup>
-                <strong>팀 검색</strong>에서는 클럽에서 출IconWrapper전하는
-                선수들 중, 시간표에 반영할 선수를 선택할 수 있습니다.
+                <strong>팀 검색</strong>에서는 클럽에서 출전하는 선수들 중,
+                시간표에 반영할 선수를 선택할 수 있습니다.
               </p>
               <br />
               <p>
