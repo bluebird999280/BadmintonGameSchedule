@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { getAllGameList } from "./thunk"
 import { IInitialState } from "./type"
-import { ICompetitionData } from "feature/search/type"
 
 const initialState: IInitialState = {
   competition: undefined,
@@ -13,10 +12,7 @@ export const scheduleSlice = createSlice({
   name: "schedule",
   initialState,
   reducers: {
-    changeCompetition: (
-      state,
-      { payload }: PayloadAction<ICompetitionData>
-    ) => {
+    changeCompetition: (state, { payload }: PayloadAction<any>) => {
       state.competition = payload
     },
   },

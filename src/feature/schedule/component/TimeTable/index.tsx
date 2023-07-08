@@ -7,16 +7,23 @@ import {
   GameRow,
 } from "./style"
 import { ITimeTableProps } from "./type"
+import { forwardRef, ForwardedRef } from "react"
 
-const TimeTable = ({ list }: ITimeTableProps) => {
+const TimeTable = forwardRef(function TimeTable(
+  { list }: ITimeTableProps,
+  forwardedRef: ForwardedRef<HTMLDivElement>
+) {
+  console.log(list)
   return (
-    <Wrapper>
+    <Wrapper ref={forwardedRef}>
       <Container>
         <TimeLine>
           <GameListByTime>
             <GameRowHead className="head">
               <div className="time">시간</div>
-              <div className="time-court">시간 (코트번호-경기번호)</div>
+              <div className="time-court">
+                시간 <br /> (코트-경기)
+              </div>
               <div className="court">코트 번호(코트 순서)</div>
               <div className="type">타입</div>
               <div className="club">클럽</div>
@@ -35,11 +42,12 @@ const TimeTable = ({ list }: ITimeTableProps) => {
                   </div>
                   <div className="type">{l.EVENT_NM.split("-")[0]}</div>
                   <div className="club">
-                    {l.T1CLUB} vs {l.T2CLUB}
+                    <div>{l.T1CLUB}</div>
+                    <div>{l.T2CLUB}</div>
                   </div>
                   <div className="name">
-                    {l.T1_PLAYER.replace("/", ",")} vs{" "}
-                    {l.T2_PLAYER.replace("/", ",")}
+                    <div>{l.T1_PLAYER.replace("/", ",")}</div>
+                    <div>{l.T2_PLAYER.replace("/", ",")}</div>
                   </div>
                 </GameRow>
               </>
@@ -49,6 +57,6 @@ const TimeTable = ({ list }: ITimeTableProps) => {
       </Container>
     </Wrapper>
   )
-}
+})
 
 export default TimeTable

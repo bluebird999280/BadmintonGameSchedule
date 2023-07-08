@@ -1,7 +1,5 @@
-import { ICompetitionData } from "feature/search/type"
-
 export interface IInitialState {
-  competition?: ICompetitionData
+  competition?: any
   club?: string[]
   gameList?: IGameListProps
 }

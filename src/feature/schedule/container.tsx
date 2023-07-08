@@ -5,18 +5,17 @@ import DownloadSchedule from "component/schedule/DownloadSchedule"
 import { Wrapper, Container } from "./style"
 import { getAllGameList } from "./thunk"
 import { useAppSelector, useAppDispatch } from "hook/redux"
-import { CheckTableType } from "./type"
 import dti from "dom-to-image"
 import { saveAs } from "file-saver"
 import parseDate from "util/func/parseDate"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { tournamentId, selectedClubList, gameList } = useAppSelector(
+  const { tournamentId, gameList, hashTableForSelectedTeam } = useAppSelector(
     (state) => ({
-      tournamentId: state.schedule.competition?.TOURNAMENT_ID,
-      selectedClubList: state.search.clubList.filter((club) => club.selected),
+      tournamentId: state.competition.competition?.TOURNAMENT_ID,
       gameList: state.schedule.gameList,
+      hashTableForSelectedTeam: state.club.hashTableForSelectedTeam,
     })
   )
 
@@ -24,7 +23,20 @@ function Schedule(): JSX.Element {
   const downloadRef = useRef<HTMLDivElement | null>(null)
 
   // useState
-  const [currentSelectedDate, setCurrentSelectedDate] = useState("")
+  const [currentSelectedDate, setCurrentSelectedDate] = useState(
+    gameList?.planDateList[0] && ""
+  )
+
+  // useMemo
+  const gameListBySelectedTeamListAndDate = useMemo(() => {
+    return gameList?.data_list.filter(
+      (data) =>
+        data.PLAN_DATE === currentSelectedDate &&
+        hashTableForSelectedTeam[data.EVENT_ID] !== undefined &&
+        (hashTableForSelectedTeam[data.EVENT_ID][data.TEAM1_ENTRY_ID] ||
+          hashTableForSelectedTeam[data.EVENT_ID][data.TEAM2_ENTRY_ID])
+    )
+  }, [gameList, hashTableForSelectedTeam, currentSelectedDate])
 
   // useCallback
   const onClickDownloadButton = useCallback(async () => {
@@ -34,33 +46,7 @@ function Schedule(): JSX.Element {
     }
   }, [currentSelectedDate])
 
-  // useMemo
-  const checkTable = useMemo(() => {
-    const temp: CheckTableType = {}
-    selectedClubList.map((selectedClub) => {
-      selectedClub.teamList.map((team) => {
-        if (team.selected) {
-          if (temp[team.EVENT_ID] === undefined)
-            temp[team.EVENT_ID] = { [team.ENTRY_ID]: true }
-          else temp[team.EVENT_ID][team.ENTRY_ID] = true
-        }
-      })
-    })
-    return temp
-  }, [selectedClubList])
-
-  const gameListBySelectedTeamListAndDate = useMemo(
-    () =>
-      gameList?.data_list.filter(
-        (data) =>
-          data.PLAN_DATE === currentSelectedDate &&
-          checkTable[data.EVENT_ID] !== undefined &&
-          (checkTable[data.EVENT_ID][data.TEAM1_ENTRY_ID] === true ||
-            checkTable[data.EVENT_ID][data.TEAM2_ENTRY_ID] === true)
-      ),
-    [checkTable, gameList, currentSelectedDate]
-  )
-
+  // useEffect
   useEffect(() => {
     if (tournamentId !== undefined)
       dispatch(
@@ -71,10 +57,14 @@ function Schedule(): JSX.Element {
       )
   }, [dispatch, tournamentId])
 
+  useEffect(() => {
+    setCurrentSelectedDate(gameList?.planDateList[0].PLAN_DATE ?? "")
+  }, [gameList])
+
   if (gameList === undefined) return <></>
   return (
     <Wrapper>
-      <Container ref={downloadRef}>
+      <Container>
         <div className="top">
           <DateSelection
             currentSelectedDate={currentSelectedDate}
@@ -83,8 +73,7 @@ function Schedule(): JSX.Element {
           />
           <DownloadSchedule onClick={onClickDownloadButton} />
         </div>
-
-        <TimeTable list={gameListBySelectedTeamListAndDate}></TimeTable>
+        <TimeTable list={gameListBySelectedTeamListAndDate} ref={downloadRef} />
       </Container>
     </Wrapper>
   )

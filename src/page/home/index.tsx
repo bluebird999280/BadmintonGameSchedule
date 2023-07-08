@@ -87,7 +87,7 @@ function HomePage(): JSX.Element {
 
               <div className="icons">
                 <a
-                  href="https://github.com/Psycoma99/BadmintonGameList"
+                  href="https://github.com/psycho-o0o/BadmintonGameList"
                   rel="noreferrer"
                   target="_blank"
                 >
@@ -97,7 +97,7 @@ function HomePage(): JSX.Element {
                   />
                 </a>
                 <a
-                  href="https://logsomthing.tistory.com/"
+                  href="https://psycho-logsomething.tistory.com/"
                   rel="noreferrer"
                   target="_blank"
                 >
