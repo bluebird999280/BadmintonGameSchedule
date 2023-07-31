@@ -87,7 +87,7 @@ function HomePage(): JSX.Element {
 
               <div className="icons">
                 <a
-                  href="https://github.com/psycho-o0o/BadmintonGameList"
+                  href="https://github.com/psycho-o0o/"
                   rel="noreferrer"
                   target="_blank"
                 >
