@@ -11,13 +11,13 @@ import parseDate from "util/func/parseDate"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { tournamentId, gameList, hashTableForSelectedTeam } = useAppSelector(
-    (state) => ({
+  const { competition, tournamentId, gameList, hashTableForSelectedTeam } =
+    useAppSelector((state) => ({
+      competition: state.competition.competition,
       tournamentId: state.competition.competition?.TOURNAMENT_ID,
       gameList: state.schedule.gameList,
       hashTableForSelectedTeam: state.club.hashTableForSelectedTeam,
-    })
-  )
+    }))
 
   // useRef
   const downloadRef = useRef<HTMLDivElement | null>(null)
@@ -29,6 +29,7 @@ function Schedule(): JSX.Element {
 
   // useMemo
   const gameListBySelectedTeamListAndDate = useMemo(() => {
+    if (gameList?.planDateList.length === 0) return undefined
     return gameList?.data_list.filter(
       (data) =>
         data.PLAN_DATE === currentSelectedDate &&
@@ -58,10 +59,20 @@ function Schedule(): JSX.Element {
   }, [dispatch, tournamentId])
 
   useEffect(() => {
-    setCurrentSelectedDate(gameList?.planDateList[0].PLAN_DATE ?? "")
+    if (gameList?.planDateList.length !== 0) {
+      setCurrentSelectedDate(gameList?.planDateList[0].PLAN_DATE ?? "")
+    }
   }, [gameList])
 
-  if (gameList === undefined) return <></>
+  if (gameList === undefined) return <>경기를 선택하세요.</>
+  if (competition?.ENTRY_OPEN_YN === "N")
+    return <>아직 대진표가 발표되기 전입니다.</>
+  if (
+    currentSelectedDate === "" ||
+    gameListBySelectedTeamListAndDate === undefined ||
+    gameListBySelectedTeamListAndDate.length === 0
+  )
+    return <>존재하는 시간표가 없습니다.</>
   return (
     <Wrapper>
       <Container>

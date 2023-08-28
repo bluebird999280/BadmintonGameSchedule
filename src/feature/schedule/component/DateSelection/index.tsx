@@ -28,7 +28,9 @@ function DateSelection({
   }))
 
   useEffect(() => {
-    setCurrentSelectedDate(planDateList[0].PLAN_DATE)
+    if (planDateList !== undefined && planDateList.length !== 0) {
+      setCurrentSelectedDate(planDateList[0].PLAN_DATE)
+    }
   }, [planDateList])
 
   return (

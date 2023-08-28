@@ -13,7 +13,7 @@ const TimeTable = forwardRef(function TimeTable(
   { list }: ITimeTableProps,
   forwardedRef: ForwardedRef<HTMLDivElement>
 ) {
-  console.log(list)
+  if (list === undefined) return <></>
   return (
     <Wrapper ref={forwardedRef}>
       <Container>
