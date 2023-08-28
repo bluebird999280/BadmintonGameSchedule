@@ -1,4 +1,4 @@
-/*! For license information please see main.89463e88.js.LICENSE.txt */
+/*! For license information please see main.478b8023.js.LICENSE.txt */
 !(function () {
   var e = {
       694: function (e, t) {
@@ -53611,60 +53611,59 @@
         ),
         eN = (0, e.forwardRef)(function (e, t) {
           var n = e.list
-          return (
-            console.log(n),
-            (0, XC.jsx)(qR, {
-              ref: t,
-              children: (0, XC.jsx)(GR, {
-                children: (0, XC.jsx)(YR, {
-                  children: (0, XC.jsxs)(QR, {
-                    children: [
-                      (0, XC.jsxs)(ZR, {
-                        className: "head",
-                        children: [
-                          (0, XC.jsx)("div", {
-                            className: "time",
-                            children: "\uc2dc\uac04",
-                          }),
-                          (0, XC.jsxs)("div", {
-                            className: "time-court",
-                            children: [
-                              "\uc2dc\uac04 ",
-                              (0, XC.jsx)("br", {}),
-                              " (\ucf54\ud2b8-\uacbd\uae30)",
-                            ],
-                          }),
-                          (0, XC.jsx)("div", {
-                            className: "court",
-                            children:
-                              "\ucf54\ud2b8 \ubc88\ud638(\ucf54\ud2b8 \uc21c\uc11c)",
-                          }),
-                          (0, XC.jsx)("div", {
-                            className: "type",
-                            children: "\ud0c0\uc785",
-                          }),
-                          (0, XC.jsx)("div", {
-                            className: "club",
-                            children: "\ud074\ub7fd",
-                          }),
-                          (0, XC.jsx)("div", {
-                            className: "name",
-                            children: "\uc120\uc218 \uc774\ub984",
-                          }),
-                        ],
-                      }),
-                      null === n || void 0 === n
-                        ? void 0
-                        : n.map(function (e) {
-                            return (0,
-                            XC.jsx)(XC.Fragment, { children: (0, XC.jsxs)(JR, { children: [(0, XC.jsx)("div", { className: "time", children: e.START_TIME }), (0, XC.jsxs)("div", { className: "time-court", children: [e.START_TIME, (0, XC.jsx)("br", {}), "(", e.COURT_NO, "-", e.COURT_SORT, ")"] }), (0, XC.jsxs)("div", { className: "court", children: ["\ucf54\ud2b8 ", e.COURT_NO, "\ubc88(", e.COURT_SORT, "\uacbd\uae30)"] }), (0, XC.jsx)("div", { className: "type", children: e.EVENT_NM.split("-")[0] }), (0, XC.jsxs)("div", { className: "club", children: [(0, XC.jsx)("div", { children: e.T1CLUB }), (0, XC.jsx)("div", { children: e.T2CLUB })] }), (0, XC.jsxs)("div", { className: "name", children: [(0, XC.jsx)("div", { children: e.T1_PLAYER.replace("/", ",") }), (0, XC.jsx)("div", { children: e.T2_PLAYER.replace("/", ",") })] })] }, "".concat(e.EVENT_ID, "-").concat(e.ENTRY_ID)) })
-                          }),
-                    ],
+          return void 0 === n
+            ? (0, XC.jsx)(XC.Fragment, {})
+            : (0, XC.jsx)(qR, {
+                ref: t,
+                children: (0, XC.jsx)(GR, {
+                  children: (0, XC.jsx)(YR, {
+                    children: (0, XC.jsxs)(QR, {
+                      children: [
+                        (0, XC.jsxs)(ZR, {
+                          className: "head",
+                          children: [
+                            (0, XC.jsx)("div", {
+                              className: "time",
+                              children: "\uc2dc\uac04",
+                            }),
+                            (0, XC.jsxs)("div", {
+                              className: "time-court",
+                              children: [
+                                "\uc2dc\uac04 ",
+                                (0, XC.jsx)("br", {}),
+                                " (\ucf54\ud2b8-\uacbd\uae30)",
+                              ],
+                            }),
+                            (0, XC.jsx)("div", {
+                              className: "court",
+                              children:
+                                "\ucf54\ud2b8 \ubc88\ud638(\ucf54\ud2b8 \uc21c\uc11c)",
+                            }),
+                            (0, XC.jsx)("div", {
+                              className: "type",
+                              children: "\ud0c0\uc785",
+                            }),
+                            (0, XC.jsx)("div", {
+                              className: "club",
+                              children: "\ud074\ub7fd",
+                            }),
+                            (0, XC.jsx)("div", {
+                              className: "name",
+                              children: "\uc120\uc218 \uc774\ub984",
+                            }),
+                          ],
+                        }),
+                        null === n || void 0 === n
+                          ? void 0
+                          : n.map(function (e) {
+                              return (0,
+                              XC.jsx)(XC.Fragment, { children: (0, XC.jsxs)(JR, { children: [(0, XC.jsx)("div", { className: "time", children: e.START_TIME }), (0, XC.jsxs)("div", { className: "time-court", children: [e.START_TIME, (0, XC.jsx)("br", {}), "(", e.COURT_NO, "-", e.COURT_SORT, ")"] }), (0, XC.jsxs)("div", { className: "court", children: ["\ucf54\ud2b8 ", e.COURT_NO, "\ubc88(", e.COURT_SORT, "\uacbd\uae30)"] }), (0, XC.jsx)("div", { className: "type", children: e.EVENT_NM.split("-")[0] }), (0, XC.jsxs)("div", { className: "club", children: [(0, XC.jsx)("div", { children: e.T1CLUB }), (0, XC.jsx)("div", { children: e.T2CLUB })] }), (0, XC.jsxs)("div", { className: "name", children: [(0, XC.jsx)("div", { children: e.T1_PLAYER.replace("/", ",") }), (0, XC.jsx)("div", { children: e.T2_PLAYER.replace("/", ",") })] })] }, "".concat(e.EVENT_ID, "-").concat(e.ENTRY_ID)) })
+                            }),
+                      ],
+                    }),
                   }),
                 }),
-              }),
-            })
-          )
+              })
         }),
         tN = eN,
         nN = PC,
@@ -53730,7 +53729,7 @@
           return (
             (0, e.useEffect)(
               function () {
-                r(o[0].PLAN_DATE)
+                void 0 !== o && 0 !== o.length && r(o[0].PLAN_DATE)
               },
               [o]
             ),
@@ -53798,6 +53797,7 @@
           n = UE(function (e) {
             var t
             return {
+              competition: e.competition.competition,
               tournamentId:
                 null === (t = e.competition.competition) || void 0 === t
                   ? void 0
@@ -53806,34 +53806,39 @@
               hashTableForSelectedTeam: e.club.hashTableForSelectedTeam,
             }
           }),
-          r = n.tournamentId,
-          o = n.gameList,
-          a = n.hashTableForSelectedTeam,
-          i = (0, e.useRef)(null),
-          c = Hn(
+          r = n.competition,
+          o = n.tournamentId,
+          a = n.gameList,
+          i = n.hashTableForSelectedTeam,
+          c = (0, e.useRef)(null),
+          l = Hn(
             (0, e.useState)(
-              (null === o || void 0 === o ? void 0 : o.planDateList[0]) && ""
+              (null === a || void 0 === a ? void 0 : a.planDateList[0]) && ""
             ),
             2
           ),
-          l = c[0],
-          u = c[1],
-          s = (0, e.useMemo)(
+          u = l[0],
+          s = l[1],
+          d = (0, e.useMemo)(
             function () {
-              return null === o || void 0 === o
-                ? void 0
-                : o.data_list.filter(function (e) {
-                    return (
-                      e.PLAN_DATE === l &&
-                      void 0 !== a[e.EVENT_ID] &&
-                      (a[e.EVENT_ID][e.TEAM1_ENTRY_ID] ||
-                        a[e.EVENT_ID][e.TEAM2_ENTRY_ID])
-                    )
-                  })
+              if (
+                0 !==
+                (null === a || void 0 === a ? void 0 : a.planDateList.length)
+              )
+                return null === a || void 0 === a
+                  ? void 0
+                  : a.data_list.filter(function (e) {
+                      return (
+                        e.PLAN_DATE === u &&
+                        void 0 !== i[e.EVENT_ID] &&
+                        (i[e.EVENT_ID][e.TEAM1_ENTRY_ID] ||
+                          i[e.EVENT_ID][e.TEAM2_ENTRY_ID])
+                      )
+                    })
             },
-            [o, a, l]
+            [a, i, u]
           ),
-          d = (0, e.useCallback)(
+          f = (0, e.useCallback)(
             Pt(
               kt().mark(function e() {
                 var t
@@ -53841,13 +53846,13 @@
                   for (;;)
                     switch ((e.prev = e.next)) {
                       case 0:
-                        if (null === i.current) {
+                        if (null === c.current) {
                           e.next = 5
                           break
                         }
-                        return (e.next = 3), yN().toBlob(i.current)
+                        return (e.next = 3), yN().toBlob(c.current)
                       case 3:
-                        ;(t = e.sent), (0, wN.saveAs)(t, cN(l) + ".png")
+                        ;(t = e.sent), (0, wN.saveAs)(t, cN(u) + ".png")
                       case 5:
                       case "end":
                         return e.stop()
@@ -53855,32 +53860,46 @@
                 }, e)
               })
             ),
-            [l]
+            [u]
           )
         return (
           (0, e.useEffect)(
             function () {
-              void 0 !== r && t(Er({ tournamentId: r, planDate: "" }))
+              void 0 !== o && t(Er({ tournamentId: o, planDate: "" }))
             },
-            [t, r]
+            [t, o]
           ),
           (0, e.useEffect)(
             function () {
               var e
-              u(
-                null !==
-                  (e =
-                    null === o || void 0 === o
-                      ? void 0
-                      : o.planDateList[0].PLAN_DATE) && void 0 !== e
-                  ? e
-                  : ""
-              )
+              0 !==
+                (null === a || void 0 === a ? void 0 : a.planDateList.length) &&
+                s(
+                  null !==
+                    (e =
+                      null === a || void 0 === a
+                        ? void 0
+                        : a.planDateList[0].PLAN_DATE) && void 0 !== e
+                    ? e
+                    : ""
+                )
             },
-            [o]
+            [a]
           ),
-          void 0 === o
-            ? (0, XC.jsx)(XC.Fragment, {})
+          void 0 === a
+            ? (0, XC.jsx)(XC.Fragment, {
+                children: "\uacbd\uae30\ub97c \uc120\ud0dd\ud558\uc138\uc694.",
+              })
+            : "N" === (null === r || void 0 === r ? void 0 : r.ENTRY_OPEN_YN)
+            ? (0, XC.jsx)(XC.Fragment, {
+                children:
+                  "\uc544\uc9c1 \ub300\uc9c4\ud45c\uac00 \ubc1c\ud45c\ub418\uae30 \uc804\uc785\ub2c8\ub2e4.",
+              })
+            : "" === u || void 0 === d || 0 === d.length
+            ? (0, XC.jsx)(XC.Fragment, {
+                children:
+                  "\uc874\uc7ac\ud558\ub294 \uc2dc\uac04\ud45c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              })
             : (0, XC.jsx)(vN, {
                 children: (0, XC.jsxs)(gN, {
                   children: [
@@ -53888,14 +53907,14 @@
                       className: "top",
                       children: [
                         (0, XC.jsx)(uN, {
-                          currentSelectedDate: l,
-                          setCurrentSelectedDate: u,
-                          planDateList: o.planDateList,
+                          currentSelectedDate: u,
+                          setCurrentSelectedDate: s,
+                          planDateList: a.planDateList,
                         }),
-                        (0, XC.jsx)(mN, { onClick: d }),
+                        (0, XC.jsx)(mN, { onClick: f }),
                       ],
                     }),
-                    (0, XC.jsx)(tN, { list: s, ref: i }),
+                    (0, XC.jsx)(tN, { list: d, ref: c }),
                   ],
                 }),
               })
@@ -53963,4 +53982,4 @@
         T()
     })()
 })()
-//# sourceMappingURL=main.89463e88.js.map
+//# sourceMappingURL=main.478b8023.js.map
