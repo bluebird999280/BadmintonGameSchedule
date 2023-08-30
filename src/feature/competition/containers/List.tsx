@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import List from "../components/List"
 import { changeCompetition } from "../slice"
@@ -22,6 +22,11 @@ export default function ListContainer(): JSX.Element {
     },
     [dispatch]
   )
+
+  useEffect(() => {
+    if (competition?.ENTRY_OPEN_YN === "N")
+      alert("대진표가 아직 만들어지지 않았습니다.")
+  }, [competition])
 
   return (
     <>
