@@ -1,4 +1,4 @@
-/*! For license information please see main.478b8023.js.LICENSE.txt */
+/*! For license information please see main.714c9dc7.js.LICENSE.txt */
 !(function () {
   var e = {
       694: function (e, t) {
@@ -15208,7 +15208,12 @@
         ),
         kr = ht({
           name: "schedule",
-          initialState: { competition: void 0, club: void 0, gameList: void 0 },
+          initialState: {
+            competition: void 0,
+            club: void 0,
+            gameList: void 0,
+            loading: !1,
+          },
           reducers: {
             changeCompetition: function (e, t) {
               var n = t.payload
@@ -15217,8 +15222,11 @@
           },
           extraReducers: function (e) {
             e.addCase(Er.fulfilled, function (e, t) {
-              e.gameList = t.payload
-            })
+              ;(e.loading = !1), (e.gameList = t.payload)
+            }),
+              e.addCase(Er.pending, function (e, t) {
+                e.loading = !0
+              })
           },
         }),
         Or = (kr.actions.changeCompetition, kr.reducer),
@@ -42986,7 +42994,12 @@
             },
             [t, n]
           )
-        return (0, XC.jsx)(QE, { query: n, onChange: r, onSubmit: o })
+        return (
+          (0, e.useEffect)(function () {
+            o()
+          }, []),
+          (0, XC.jsx)(QE, { query: n, onChange: r, onSubmit: o })
+        )
       }
       var ZE,
         ek,
@@ -43087,14 +43100,25 @@
             },
             [t]
           )
-        return (0, XC.jsx)(XC.Fragment, {
-          children:
-            a[r] &&
-            a[r].map(function (e, t) {
-              return (0,
-              XC.jsx)(ik, { data: e, selected: e === o, onClick: i(e) }, t)
-            }),
-        })
+        return (
+          (0, e.useEffect)(
+            function () {
+              "N" === (null === o || void 0 === o ? void 0 : o.ENTRY_OPEN_YN) &&
+                alert(
+                  "\ub300\uc9c4\ud45c\uac00 \uc544\uc9c1 \ub9cc\ub4e4\uc5b4\uc9c0\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4."
+                )
+            },
+            [o]
+          ),
+          (0, XC.jsx)(XC.Fragment, {
+            children:
+              a[r] &&
+              a[r].map(function (e, t) {
+                return (0,
+                XC.jsx)(ik, { data: e, selected: e === o, onClick: i(e) }, t)
+              }),
+          })
+        )
       }
       var lk = ml.div(
         ZE ||
@@ -43315,18 +43339,21 @@
       function Mk() {
         var t,
           n = WE(),
-          r = UE(function (e) {
-            return {
-              currentPage: e.club.currentPage,
-              competition: e.competition.competition,
-              clubTable: e.club.clubTable,
-              searchedClubNameArray: e.club.searchedClubNameArray,
-            }
-          }),
+          r =
+            (oi(),
+            UE(function (e) {
+              return {
+                currentPage: e.club.currentPage,
+                competition: e.competition.competition,
+                clubTable: e.club.clubTable,
+                searchedClubNameArray: e.club.searchedClubNameArray,
+              }
+            })),
           o = r.currentPage,
-          a = (r.competition, r.clubTable),
-          i = r.searchedClubNameArray,
-          c = (0, e.useCallback)(
+          a = r.competition,
+          i = r.clubTable,
+          c = r.searchedClubNameArray,
+          l = (0, e.useCallback)(
             function (e) {
               return function () {
                 n(Wr(e))
@@ -43334,15 +43361,23 @@
             },
             [n]
           )
-        return null === a
-          ? (0, XC.jsx)(XC.Fragment, {})
+        return void 0 === a
+          ? (0, XC.jsx)(XC.Fragment, {
+              children:
+                "\ub300\ud68c\ub97c \uc120\ud0dd\ud574\uc8fc\uc138\uc694",
+            })
+          : null === i
+          ? (0, XC.jsx)(XC.Fragment, {
+              children:
+                "\uc544\uc9c1 \ud074\ub7fd\uba85\ub2e8\uc774 \ubc1c\ud45c\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+            })
           : (0, XC.jsx)(XC.Fragment, {
               children:
-                null === (t = i[o]) || void 0 === t
+                null === (t = c[o]) || void 0 === t
                   ? void 0
                   : t.map(function (e) {
                       return (0,
-                      XC.jsx)(jk, { name: e, data: a[e], onClick: c(e) }, e)
+                      XC.jsx)(jk, { name: e, data: i[e], onClick: l(e) }, e)
                     }),
             })
       }
@@ -53502,12 +53537,14 @@
                 query: e.team.query,
                 clubTable: e.club.clubTable,
                 currentPage: e.team.currentPage,
+                competition: e.competition.competition,
               }
             }),
             r = n.query,
             o = n.clubTable,
             a = n.currentPage,
-            i = (0, e.useCallback)(
+            i = n.competition,
+            c = (0, e.useCallback)(
               function (e, n) {
                 return function () {
                   t(Kr({ clubName: e, teamIndex: n }))
@@ -53515,7 +53552,7 @@
               },
               [t]
             ),
-            c = (0, e.useMemo)(
+            l = (0, e.useMemo)(
               function () {
                 return null !== o
                   ? Object.keys(o)
@@ -53539,43 +53576,58 @@
               },
               [r, o]
             )
-          return (0, XC.jsx)(xE, {
-            children:
-              null !== o &&
-              null !== c &&
-              c.map(function (e) {
-                return (0, XC.jsx)(
-                  FR,
-                  {
-                    header: e,
-                    children: (0, XC.jsx)(SR, {
-                      itemLayout: "horizontal",
-                      dataSource: o[e].team,
-                      renderItem: function (t, n) {
-                        return (
-                          ("" === r ||
-                            -1 !== t.PLAYER_NM1.search(r) ||
-                            -1 !== t.PLAYER_NM2.search(r)) &&
-                          (0, XC.jsxs)(SR.Item, {
-                            onClick: i(e, n),
-                            children: [
-                              (0, XC.jsx)(SR.Item.Meta, {
-                                title: ""
-                                  .concat(t.PLAYER_NM1, ", ")
-                                  .concat(t.PLAYER_NM2),
-                                description: "".concat(t.EVENT_NM),
-                              }),
-                              (0, XC.jsx)(LR, { checked: t.selected }),
-                            ],
-                          })
-                        )
+          return void 0 === i
+            ? (0, XC.jsx)(XC.Fragment, {
+                children:
+                  "\ub300\ud68c\ub97c \uc120\ud0dd\ud574\uc8fc\uc138\uc694.",
+              })
+            : null === o
+            ? (0, XC.jsx)(XC.Fragment, {
+                children:
+                  "\ud074\ub7fd\uba85\ub2e8\uc774 \uc544\uc9c1 \ubc1c\ud45c\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+              })
+            : null !== l && 0 === l.length
+            ? (0, XC.jsx)(XC.Fragment, {
+                children:
+                  "\ud074\ub7fd\uc774 \uc120\ud0dd\ub418\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+              })
+            : (0, XC.jsx)(xE, {
+                children:
+                  null !== o &&
+                  null !== l &&
+                  l.map(function (e) {
+                    return (0, XC.jsx)(
+                      FR,
+                      {
+                        header: e,
+                        children: (0, XC.jsx)(SR, {
+                          itemLayout: "horizontal",
+                          dataSource: o[e].team,
+                          renderItem: function (t, n) {
+                            return (
+                              ("" === r ||
+                                -1 !== t.PLAYER_NM1.search(r) ||
+                                -1 !== t.PLAYER_NM2.search(r)) &&
+                              (0, XC.jsxs)(SR.Item, {
+                                onClick: c(e, n),
+                                children: [
+                                  (0, XC.jsx)(SR.Item.Meta, {
+                                    title: ""
+                                      .concat(t.PLAYER_NM1, ", ")
+                                      .concat(t.PLAYER_NM2),
+                                    description: "".concat(t.EVENT_NM),
+                                  }),
+                                  (0, XC.jsx)(LR, { checked: t.selected }),
+                                ],
+                              })
+                            )
+                          },
+                        }),
                       },
-                    }),
-                  },
-                  e
-                )
-              }),
-          })
+                      e
+                    )
+                  }),
+              })
         }
       function $R() {
         return (0, XC.jsxs)(XC.Fragment, {
@@ -53611,8 +53663,11 @@
         ),
         eN = (0, e.forwardRef)(function (e, t) {
           var n = e.list
-          return void 0 === n
-            ? (0, XC.jsx)(XC.Fragment, {})
+          return void 0 === n || 0 === n.length
+            ? (0, XC.jsx)(XC.Fragment, {
+                children:
+                  "\uc774 \ub0a0\uc9dc\uc5d0\ub294 \uacbd\uae30\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              })
             : (0, XC.jsx)(qR, {
                 ref: t,
                 children: (0, XC.jsx)(GR, {
@@ -53702,7 +53757,7 @@
         lN = ml.div(
           iN ||
             (iN = Ai([
-              "\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 15px;\n  cursor: pointer;\n\n  h2 {\n    font-size: 25px;\n  }\n",
+              "\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 15px;\n  cursor: pointer;\n  min-width: 360px;\n\n  h2 {\n    font-size: 25px;\n  }\n",
             ]))
         )
       var uN = function (t) {
@@ -53803,23 +53858,25 @@
                   ? void 0
                   : t.TOURNAMENT_ID,
               gameList: e.schedule.gameList,
+              loading: e.schedule.loading,
               hashTableForSelectedTeam: e.club.hashTableForSelectedTeam,
             }
           }),
           r = n.competition,
           o = n.tournamentId,
           a = n.gameList,
-          i = n.hashTableForSelectedTeam,
-          c = (0, e.useRef)(null),
-          l = Hn(
+          i = n.loading,
+          c = n.hashTableForSelectedTeam,
+          l = (0, e.useRef)(null),
+          u = Hn(
             (0, e.useState)(
               (null === a || void 0 === a ? void 0 : a.planDateList[0]) && ""
             ),
             2
           ),
-          u = l[0],
-          s = l[1],
-          d = (0, e.useMemo)(
+          s = u[0],
+          d = u[1],
+          f = (0, e.useMemo)(
             function () {
               if (
                 0 !==
@@ -53829,16 +53886,16 @@
                   ? void 0
                   : a.data_list.filter(function (e) {
                       return (
-                        e.PLAN_DATE === u &&
-                        void 0 !== i[e.EVENT_ID] &&
-                        (i[e.EVENT_ID][e.TEAM1_ENTRY_ID] ||
-                          i[e.EVENT_ID][e.TEAM2_ENTRY_ID])
+                        e.PLAN_DATE === s &&
+                        void 0 !== c[e.EVENT_ID] &&
+                        (c[e.EVENT_ID][e.TEAM1_ENTRY_ID] ||
+                          c[e.EVENT_ID][e.TEAM2_ENTRY_ID])
                       )
                     })
             },
-            [a, i, u]
+            [a, c, s]
           ),
-          f = (0, e.useCallback)(
+          p = (0, e.useCallback)(
             Pt(
               kt().mark(function e() {
                 var t
@@ -53846,13 +53903,13 @@
                   for (;;)
                     switch ((e.prev = e.next)) {
                       case 0:
-                        if (null === c.current) {
+                        if (null === l.current) {
                           e.next = 5
                           break
                         }
-                        return (e.next = 3), yN().toBlob(c.current)
+                        return (e.next = 3), yN().toBlob(l.current)
                       case 3:
-                        ;(t = e.sent), (0, wN.saveAs)(t, cN(u) + ".png")
+                        ;(t = e.sent), (0, wN.saveAs)(t, cN(s) + ".png")
                       case 5:
                       case "end":
                         return e.stop()
@@ -53860,7 +53917,7 @@
                 }, e)
               })
             ),
-            [u]
+            [s]
           )
         return (
           (0, e.useEffect)(
@@ -53874,7 +53931,7 @@
               var e
               0 !==
                 (null === a || void 0 === a ? void 0 : a.planDateList.length) &&
-                s(
+                d(
                   null !==
                     (e =
                       null === a || void 0 === a
@@ -53886,7 +53943,12 @@
             },
             [a]
           ),
-          void 0 === a
+          i
+            ? (0, XC.jsx)(XC.Fragment, {
+                children:
+                  "\ub370\uc774\ud130\ub97c \ubd88\ub7ec\uc624\ub294 \uc911\uc785\ub2c8\ub2e4.",
+              })
+            : void 0 === a
             ? (0, XC.jsx)(XC.Fragment, {
                 children: "\uacbd\uae30\ub97c \uc120\ud0dd\ud558\uc138\uc694.",
               })
@@ -53895,7 +53957,7 @@
                 children:
                   "\uc544\uc9c1 \ub300\uc9c4\ud45c\uac00 \ubc1c\ud45c\ub418\uae30 \uc804\uc785\ub2c8\ub2e4.",
               })
-            : "" === u || void 0 === d || 0 === d.length
+            : "" === s || void 0 === f
             ? (0, XC.jsx)(XC.Fragment, {
                 children:
                   "\uc874\uc7ac\ud558\ub294 \uc2dc\uac04\ud45c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4.",
@@ -53907,14 +53969,14 @@
                       className: "top",
                       children: [
                         (0, XC.jsx)(uN, {
-                          currentSelectedDate: u,
-                          setCurrentSelectedDate: s,
+                          currentSelectedDate: s,
+                          setCurrentSelectedDate: d,
                           planDateList: a.planDateList,
                         }),
-                        (0, XC.jsx)(mN, { onClick: f }),
+                        (0, XC.jsx)(mN, { onClick: p }),
                       ],
                     }),
-                    (0, XC.jsx)(tN, { list: d, ref: c }),
+                    (0, XC.jsx)(tN, { list: f, ref: l }),
                   ],
                 }),
               })
@@ -53982,4 +54044,4 @@
         T()
     })()
 })()
-//# sourceMappingURL=main.478b8023.js.map
+//# sourceMappingURL=main.714c9dc7.js.map
