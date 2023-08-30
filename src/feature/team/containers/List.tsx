@@ -8,11 +8,14 @@ const { Panel } = Collapse
 
 function ListContainer(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { query, clubTable, currentPage } = useAppSelector((state) => ({
-    query: state.team.query,
-    clubTable: state.club.clubTable,
-    currentPage: state.team.currentPage,
-  }))
+  const { query, clubTable, currentPage, competition } = useAppSelector(
+    (state) => ({
+      query: state.team.query,
+      clubTable: state.club.clubTable,
+      currentPage: state.team.currentPage,
+      competition: state.competition.competition,
+    })
+  )
 
   const onClick = useCallback(
     (clubName: string, teamIndex: number) => () => {
@@ -39,6 +42,10 @@ function ListContainer(): JSX.Element {
     return null
   }, [query, clubTable])
 
+  if (competition === undefined) return <>대회를 선택해주세요.</>
+  if (clubTable === null) return <>클럽명단이 아직 발표되지 않았습니다.</>
+  if (clubNameArray !== null && clubNameArray.length === 0)
+    return <>클럽이 선택되지 않았습니다.</>
   return (
     <Collapse>
       {clubTable !== null &&
