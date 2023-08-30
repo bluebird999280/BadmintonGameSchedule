@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   margin-bottom: 15px;
   cursor: pointer;
+  min-width: 360px;
 
   h2 {
     font-size: 25px;

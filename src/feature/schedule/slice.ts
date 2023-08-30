@@ -6,6 +6,7 @@ const initialState: IInitialState = {
   competition: undefined,
   club: undefined,
   gameList: undefined,
+  loading: false,
 }
 
 export const scheduleSlice = createSlice({
@@ -18,8 +19,12 @@ export const scheduleSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getAllGameList.fulfilled, (state, action) => {
+      state.loading = false
       state.gameList = action.payload
-    })
+    }),
+      builder.addCase(getAllGameList.pending, (state, action) => {
+        state.loading = true
+      })
   },
 })
 

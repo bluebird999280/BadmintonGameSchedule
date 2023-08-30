@@ -11,13 +11,19 @@ import parseDate from "util/func/parseDate"
 
 function Schedule(): JSX.Element {
   const dispatch = useAppDispatch()
-  const { competition, tournamentId, gameList, hashTableForSelectedTeam } =
-    useAppSelector((state) => ({
-      competition: state.competition.competition,
-      tournamentId: state.competition.competition?.TOURNAMENT_ID,
-      gameList: state.schedule.gameList,
-      hashTableForSelectedTeam: state.club.hashTableForSelectedTeam,
-    }))
+  const {
+    competition,
+    tournamentId,
+    gameList,
+    loading,
+    hashTableForSelectedTeam,
+  } = useAppSelector((state) => ({
+    competition: state.competition.competition,
+    tournamentId: state.competition.competition?.TOURNAMENT_ID,
+    gameList: state.schedule.gameList,
+    loading: state.schedule.loading,
+    hashTableForSelectedTeam: state.club.hashTableForSelectedTeam,
+  }))
 
   // useRef
   const downloadRef = useRef<HTMLDivElement | null>(null)
@@ -64,15 +70,17 @@ function Schedule(): JSX.Element {
     }
   }, [gameList])
 
+  if (loading) return <>데이터를 불러오는 중입니다.</>
+
   if (gameList === undefined) return <>경기를 선택하세요.</>
   if (competition?.ENTRY_OPEN_YN === "N")
     return <>아직 대진표가 발표되기 전입니다.</>
   if (
     currentSelectedDate === "" ||
-    gameListBySelectedTeamListAndDate === undefined ||
-    gameListBySelectedTeamListAndDate.length === 0
+    gameListBySelectedTeamListAndDate === undefined
   )
     return <>존재하는 시간표가 없습니다.</>
+
   return (
     <Wrapper>
       <Container>

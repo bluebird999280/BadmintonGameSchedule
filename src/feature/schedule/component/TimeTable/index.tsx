@@ -13,7 +13,8 @@ const TimeTable = forwardRef(function TimeTable(
   { list }: ITimeTableProps,
   forwardedRef: ForwardedRef<HTMLDivElement>
 ) {
-  if (list === undefined) return <></>
+  if (list === undefined || list.length === 0)
+    return <>이 날짜에는 경기가 없습니다.</>
   return (
     <Wrapper ref={forwardedRef}>
       <Container>

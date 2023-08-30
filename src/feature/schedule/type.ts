@@ -2,6 +2,7 @@ export interface IInitialState {
   competition?: any
   club?: string[]
   gameList?: IGameListProps
+  loading: boolean
 }
 
 export interface IDataListProps {
