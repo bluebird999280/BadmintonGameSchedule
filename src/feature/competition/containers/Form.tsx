@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { useAppSelector, useAppDispatch } from "hook/redux"
 import {
   changeCompetition,
@@ -32,6 +32,10 @@ export default function FormContainer(): JSX.Element {
     },
     [dispatch, query]
   )
+
+  useEffect(() => {
+    onSubmit()
+  }, [])
 
   return <Form query={query} onChange={onChange} onSubmit={onSubmit} />
 }
