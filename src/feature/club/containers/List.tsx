@@ -2,9 +2,11 @@ import { useCallback } from "react"
 import { useAppDispatch, useAppSelector } from "hook/redux"
 import { selectClub } from "../slice"
 import List from "../components/List"
+import { useNavigate } from "react-router-dom"
 
 export default function ListContainer(): React.ReactElement {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const { currentPage, competition, clubTable, searchedClubNameArray } =
     useAppSelector((state) => ({
       currentPage: state.club.currentPage,
@@ -20,7 +22,13 @@ export default function ListContainer(): React.ReactElement {
     [dispatch]
   )
 
-  if (clubTable === null) return <></>
+  if (competition === undefined) {
+    return <>대회를 선택해주세요</>
+  }
+  if (clubTable === null) {
+    return <>아직 클럽명단이 발표되지 않았습니다.</>
+  }
+
   return (
     <>
       {searchedClubNameArray[currentPage]?.map((clubName) => (
